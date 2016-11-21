@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "termId": 1,
+    "sequence": 1,
+    "title": "Prelim Topic 1",
+    "description": "Prelim Topic 1 Description",
+    "objective": "Prelim Topic 1 Objective",
+    "image": "image_1"
+  },
+  {
+    "id": 2,
+    "termId": 1,
+    "sequence": 2,
+    "title": "Prelim Topic 2",
+    "description": "Prelim Topic 2 Description",
+    "objective": "Prelim Topic 2 Objective",
+    "image": "image_2"
+  },
+  {
+    "id": 3,
+    "termId": 1,
+    "sequence": 3,
+    "title": "Prelim Topic 3",
+    "description": "Prelim Topic 3 Description",
+    "objective": "Prelim Topic 3 Objective",
+    "image": "image_3"
+  },
+  {
+    "id": 4,
+    "termId": 1,
+    "sequence": 4,
+    "title": "Prelim Topic 4",
+    "description": "Prelim Topic 4 Description",
+    "objective": "Prelim Topic 4 Objective",
+    "image": "image_4"
+  },
+  {
+    "id": 5,
+    "termId": 1,
+    "sequence": 5,
+    "title": "Prelim Topic 5",
+    "description": "Prelim Topic 5 Description",
+    "objective": "Prelim Topic 5 Objective",
+    "image": "image_5"
+  },
+  {
+    "id": 6,
+    "termId": 2,
+    "sequence": 1,
+    "title": "Midterm Topic 1",
+    "description": "Midterm Topic 1 Description",
+    "objective": "Midterm Topic 1 Objective",
+    "image": "image_1"
+  },
+  {
+    "id": 7,
+    "termId": 2,
+    "sequence": 2,
+    "title": "Midterm Topic 2",
+    "description": "Midterm Topic 2 Description",
+    "objective": "Midterm Topic 2 Objective",
+    "image": "image_2"
+  },
+  {
+    "id": 8,
+    "termId": 2,
+    "sequence": 3,
+    "title": "Midterm Topic 3",
+    "description": "Midterm Topic 3 Description",
+    "objective": "Midterm Topic 3 Objective",
+    "image": "image_3"
+  },
+  {
+    "id": 9,
+    "termId": 2,
+    "sequence": 4,
+    "title": "Midterm Topic 4",
+    "description": "Midterm Topic 4 Description",
+    "objective": "Midterm Topic 4 Objective",
+    "image": "image_4"
+  },
+  {
+    "id": 10,
+    "termId": 2,
+    "sequence": 5,
+    "title": "Midterm Topic 5",
+    "description": "Midterm Topic 5 Description",
+    "objective": "Midterm Topic 5 Objective",
+    "image": "image_5"
+  },
+  {
+    "id": 11,
+    "termId": 3,
+    "sequence": 1,
+    "title": "Finals Topic 1",
+    "description": "Finals Topic 1 Description",
+    "objective": "Finals Topic 1 Objective",
+    "image": "image_1"
+  },
+  {
+    "id": 12,
+    "termId": 3,
+    "sequence": 2,
+    "title": "Finals Topic 2",
+    "description": "Finals Topic 2 Description",
+    "objective": "Finals Topic 2 Objective",
+    "image": "image_2"
+  },
+  {
+    "id": 13,
+    "termId": 3,
+    "sequence": 3,
+    "title": "Finals Topic 3",
+    "description": "Finals Topic 3 Description",
+    "objective": "Finals Topic 3 Objective",
+    "image": "image_3"
+  },
+  {
+    "id": 14,
+    "termId": 3,
+    "sequence": 4,
+    "title": "Finals Topic 4",
+    "description": "Finals Topic 4 Description",
+    "objective": "Finals Topic 4 Objective",
+    "image": "image_4"
+  },
+  {
+    "id": 15,
+    "termId": 3,
+    "sequence": 5,
+    "title": "Finals Topic 5",
+    "description": "Finals Topic 5 Description",
+    "objective": "Finals Topic 5 Objective",
+    "image": "image_5"
+  }
+]

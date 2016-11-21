@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "sequence": 1,
+    "code": "P",
+    "title": "Prelim",
+    "objective": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean luctus risus vitae arcu malesuada fringilla. Donec sit amet purus lacinia, bibendum orci id, dictum nibh."
+  },
+  {
+    "id": 2,
+    "sequence": 2,
+    "code": "M",
+    "title": "Midterm",
+    "objective": "Suspendisse scelerisque tempus tellus, non lobortis tortor sagittis id. Pellentesque eget ante mollis ex hendrerit suscipit. Etiam convallis, orci imperdiet blandit imperdiet, elit purus malesuada est, elementum tristique tortor augue ut velit."
+  },
+  {
+    "id": 3,
+    "sequence": 3,
+    "code": "F",
+    "title": "Finals",
+    "objective": "Aliquam erat volutpat. Nulla facilisi. Suspendisse a mauris tempus mauris finibus imperdiet id nec magna."
+  }
+]
