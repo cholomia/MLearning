@@ -36,16 +36,11 @@ public class App extends Application {
             public void execute(Realm realm) {
 
                 realm.delete(Term.class);
-                realm.createAllFromJson(Term.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.terms));
-
                 realm.delete(Topic.class);
-                realm.createOrUpdateAllFromJson(Topic.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.topics));
-
                 realm.delete(Lesson.class);
-                realm.createOrUpdateAllFromJson(Lesson.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.lessons));
-
                 realm.delete(LessonDetail.class);
-                realm.createOrUpdateAllFromJson(Lesson.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.lesson_details));
+
+                realm.createAllFromJson(Term.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.study));
 
             }
         }, new Realm.Transaction.OnSuccess() {

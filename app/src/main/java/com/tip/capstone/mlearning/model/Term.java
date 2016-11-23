@@ -19,7 +19,7 @@ public class Term extends RealmObject {
     private String code;
     private String title;
     private String objective;
-    private RealmList<Topic> topicRealmList;
+    private RealmList<Topic> topics;
 
     public int getId() {
         return id;
@@ -61,11 +61,11 @@ public class Term extends RealmObject {
         this.objective = objective;
     }
 
-    public RealmList<Topic> getTopicRealmList() {
-        return topicRealmList;
+    public RealmList<Topic> getTopics() {
+        return topics;
     }
 
-    public void setTopicRealmList(RealmList<Topic> topicRealmList) {
-        this.topicRealmList = topicRealmList;
+    public void setTopics(RealmList<Topic> topics) {
+        this.topics = topics;
     }
 }

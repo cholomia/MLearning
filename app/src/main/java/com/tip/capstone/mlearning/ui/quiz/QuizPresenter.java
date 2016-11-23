@@ -54,4 +54,7 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
         return i + (int) (Math.random() * (size - 1));
     }
 
+    public int getAverage(int score, int items) {
+        return ((score / items) * 50) + 50;
+    }
 }

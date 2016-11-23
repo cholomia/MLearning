@@ -20,7 +20,7 @@ public class Topic extends RealmObject {
     private String description;
     private String objective;
     private String image;
-    private RealmList<Lesson> lessonRealmList;
+    private RealmList<Lesson> lessons;
     private RealmList<Question> questionRealmList;
 
     public int getId() {
@@ -71,12 +71,12 @@ public class Topic extends RealmObject {
         this.image = image;
     }
 
-    public RealmList<Lesson> getLessonRealmList() {
-        return lessonRealmList;
+    public RealmList<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setLessonRealmList(RealmList<Lesson> lessonRealmList) {
-        this.lessonRealmList = lessonRealmList;
+    public void setLessons(RealmList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     public RealmList<Question> getQuestionRealmList() {

@@ -1,6 +1,7 @@
 package com.tip.capstone.mlearning.model;
 
 import io.realm.RealmList;
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -8,7 +9,7 @@ import io.realm.annotations.PrimaryKey;
  * @since 21/11/2016
  */
 
-public class Assessment {
+public class Assessment extends RealmObject {
 
     @PrimaryKey
     private int id;

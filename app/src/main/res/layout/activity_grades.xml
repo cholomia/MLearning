@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_grades"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.tip.capstone.mlearning.ui.grades.GradesActivity">
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Topic"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_widthPercent="55%" />
+
+            <TextView
+                android:id="@+id/txt_raw_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txt_title"
+                android:gravity="end"
+                android:text="Raw Score"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_widthPercent="20%" />
+
+            <TextView
+                android:id="@+id/txt_average"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/txt_raw_score"
+                android:gravity="end"
+                android:text="Average"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_widthPercent="20%" />
+
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</layout>

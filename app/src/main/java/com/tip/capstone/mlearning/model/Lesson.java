@@ -17,7 +17,7 @@ public class Lesson extends RealmObject {
     private int sequence;
     private String title;
     private String description;
-    private RealmList<LessonDetail> lessonDetailRealmList;
+    private RealmList<LessonDetail> lessondetails;
 
     public int getId() {
         return id;
@@ -51,11 +51,11 @@ public class Lesson extends RealmObject {
         this.description = description;
     }
 
-    public RealmList<LessonDetail> getLessonDetailRealmList() {
-        return lessonDetailRealmList;
+    public RealmList<LessonDetail> getLessondetails() {
+        return lessondetails;
     }
 
-    public void setLessonDetailRealmList(RealmList<LessonDetail> lessonDetailRealmList) {
-        this.lessonDetailRealmList = lessonDetailRealmList;
+    public void setLessondetails(RealmList<LessonDetail> lessondetails) {
+        this.lessondetails = lessondetails;
     }
 }

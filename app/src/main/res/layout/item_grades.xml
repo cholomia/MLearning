@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="grade"
+            type="com.tip.capstone.mlearning.model.Grades" />
+    </data>
+
+    <android.support.percent.PercentRelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{grade.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_marginStartPercent="5%"
+            app:layout_widthPercent="55%" />
+
+        <TextView
+            android:id="@+id/txt_raw_score"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/txt_title"
+            android:gravity="end"
+            android:text='@{grade.quizGrade != null ? grade.quizGrade.rawScore + "/" + grade.quizGrade.itemCount : "N/A"}'
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_widthPercent="20%" />
+
+        <TextView
+            android:id="@+id/txt_average"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/txt_raw_score"
+            android:gravity="end"
+            android:text='@{grade.quizGrade != null ? grade.quizGrade.average() + "%" : "N/A"}'
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_widthPercent="20%" />
+
+    </android.support.percent.PercentRelativeLayout>
+
+</layout>

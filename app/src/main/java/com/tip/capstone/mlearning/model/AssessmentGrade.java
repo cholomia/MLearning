@@ -1,5 +1,6 @@
 package com.tip.capstone.mlearning.model;
 
+import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -7,13 +8,13 @@ import io.realm.annotations.PrimaryKey;
  * @since 21/11/2016
  */
 
-public class AssessmentGrade {
+public class AssessmentGrade extends RealmObject {
 
     @PrimaryKey
     private int id;
     private int rawScore;
     private int itemCount;
-    private int dateUpdated;
+    private long dateUpdated;
 
     public int getId() {
         return id;
@@ -39,11 +40,11 @@ public class AssessmentGrade {
         this.itemCount = itemCount;
     }
 
-    public int getDateUpdated() {
+    public long getDateUpdated() {
         return dateUpdated;
     }
 
-    public void setDateUpdated(int dateUpdated) {
+    public void setDateUpdated(long dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
 }

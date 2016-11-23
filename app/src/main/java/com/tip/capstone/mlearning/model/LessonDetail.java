@@ -16,7 +16,7 @@ public class LessonDetail extends RealmObject {
     private int sequence;
     private String body;
     private String bodyCaption;
-    private int detailType;
+    private int body_type;
 
     public int getId() {
         return id;
@@ -50,11 +50,11 @@ public class LessonDetail extends RealmObject {
         this.bodyCaption = bodyCaption;
     }
 
-    public int getDetailType() {
-        return detailType;
+    public int getBody_type() {
+        return body_type;
     }
 
-    public void setDetailType(int detailType) {
-        this.detailType = detailType;
+    public void setBody_type(int body_type) {
+        this.body_type = body_type;
     }
 }

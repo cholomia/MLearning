@@ -12,10 +12,9 @@ public class QuizGrade extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private int lessonId;
     private int rawScore;
     private int itemCount;
-    private int dateUpdated;
+    private long dateUpdated;
 
     public int getId() {
         return id;
@@ -23,14 +22,6 @@ public class QuizGrade extends RealmObject {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getLessonId() {
-        return lessonId;
-    }
-
-    public void setLessonId(int lessonId) {
-        this.lessonId = lessonId;
     }
 
     public int getRawScore() {
@@ -49,11 +40,15 @@ public class QuizGrade extends RealmObject {
         this.itemCount = itemCount;
     }
 
-    public int getDateUpdated() {
+    public long getDateUpdated() {
         return dateUpdated;
     }
 
-    public void setDateUpdated(int dateUpdated) {
+    public void setDateUpdated(long dateUpdated) {
         this.dateUpdated = dateUpdated;
+    }
+
+    public double average() {
+        return ((rawScore / itemCount) * 50) + 50;
     }
 }

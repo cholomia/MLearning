@@ -55,7 +55,7 @@ public class TopicsListActivity extends MvpActivity<TopicListView, TopicListPres
         TopicListAdapter topicListAdapter = new TopicListAdapter(this, getMvpView());
         binding.recyclerView.setAdapter(topicListAdapter);
 
-        topicListAdapter.setTopicList(term.getTopicRealmList());
+        topicListAdapter.setTopicList(term.getTopics().sort(Topic.COL_SEQ));
     }
 
     @Override

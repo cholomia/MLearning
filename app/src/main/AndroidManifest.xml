@@ -27,7 +27,9 @@
             android:name=".ui.lesson.LessonActivity"
             android:label="@string/title_activity_lesson"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.quiz.QuizActivity"></activity>
+        <activity android:name=".ui.quiz.QuizActivity" />
+        <activity android:name=".ui.assessment.AssessmentActivity" />
+        <activity android:name=".ui.grades.GradesActivity"></activity>
     </application>
 
 </manifest>

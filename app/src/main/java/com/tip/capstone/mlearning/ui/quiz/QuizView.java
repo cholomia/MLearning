@@ -1,6 +1,10 @@
 package com.tip.capstone.mlearning.ui.quiz;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.tip.capstone.mlearning.model.Question;
+import com.tip.capstone.mlearning.model.UserAnswer;
+
+import java.util.List;
 
 /**
  * @author pocholomia
@@ -10,4 +14,6 @@ public interface QuizView extends MvpView {
     void onPrevious();
 
     void onNext();
+
+    void restoreData(int counter, List<Question> questionList, List<UserAnswer> userAnswerList);
 }

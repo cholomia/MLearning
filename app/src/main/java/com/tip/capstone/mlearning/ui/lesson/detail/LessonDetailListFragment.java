@@ -2,6 +2,7 @@ package com.tip.capstone.mlearning.ui.lesson.detail;
 
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,6 +17,7 @@ import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.FragmentLessonBinding;
 import com.tip.capstone.mlearning.model.Lesson;
+import com.tip.capstone.mlearning.model.LessonDetail;
 
 import io.realm.Realm;
 
@@ -26,6 +28,7 @@ public class LessonDetailListFragment extends MvpFragment<LessonDetailListView, 
 
     private int lessonId;
     private Realm realm;
+    private FragmentLessonBinding binding;
 
     public static LessonDetailListFragment newInstance(int lessonId) {
         LessonDetailListFragment fragment = new LessonDetailListFragment();
@@ -49,7 +52,7 @@ public class LessonDetailListFragment extends MvpFragment<LessonDetailListView, 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentLessonBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_lesson, container, false);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
@@ -62,7 +65,9 @@ public class LessonDetailListFragment extends MvpFragment<LessonDetailListView, 
         realm = Realm.getDefaultInstance();
         Lesson lesson = realm.where(Lesson.class).equalTo(Constant.ID, lessonId).findFirst();
         LessonDetailListAdapter lessonDetailListAdapter = new LessonDetailListAdapter(getContext(), lesson);
-        lessonDetailListAdapter.setLessonDetails(realm.copyFromRealm(lesson.getLessonDetailRealmList()));
+        binding.recyclerView.setAdapter(lessonDetailListAdapter);
+        lessonDetailListAdapter.setLessonDetails(realm.copyFromRealm(lesson.getLessondetails().sort(LessonDetail.COL_SEQ)));
+
     }
 
     @Override

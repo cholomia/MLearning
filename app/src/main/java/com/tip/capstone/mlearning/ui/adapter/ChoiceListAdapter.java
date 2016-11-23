@@ -1,4 +1,4 @@
-package com.tip.capstone.mlearning.ui.quiz;
+package com.tip.capstone.mlearning.ui.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;

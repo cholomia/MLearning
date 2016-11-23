@@ -1,6 +1,8 @@
 package com.tip.capstone.mlearning.helper;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.Log;
 
 /**
  * @author pocholomia
@@ -9,11 +11,18 @@ import android.content.Context;
 
 public class ImageHelper {
 
+    private static final String TAG = ImageHelper.class.getSimpleName();
+
     public static int getResourceId(Context context, String pVariableName) {
         try {
-            return context.getResources().getIdentifier(pVariableName, "drawable", context.getPackageName());
+            Resources resources = context.getResources();
+            String[] imageName = pVariableName.split("\\.");
+            Log.d(TAG, "getResourceId: imagename " + imageName[0]);
+            final int resourceId = resources.getIdentifier(imageName[0], "drawable", context.getApplicationContext().getPackageName());
+            //return ContextCompat.getDrawable(context, resourceId);
+            return context.getResources().getIdentifier(imageName[0], "drawable", context.getPackageName());
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "getResourceId: " + pVariableName, e);
             return -1;
         }
     }

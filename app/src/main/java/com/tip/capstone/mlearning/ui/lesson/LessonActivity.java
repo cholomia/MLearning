@@ -18,6 +18,7 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityLessonBinding;
+import com.tip.capstone.mlearning.model.Lesson;
 import com.tip.capstone.mlearning.model.Topic;
 import com.tip.capstone.mlearning.ui.quiz.QuizActivity;
 
@@ -132,7 +133,7 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
     }
 
     private void setUiPageViewController() {
-        lessonPageAdapter.setLessonList(realm.copyFromRealm(topic.getLessonRealmList()));
+        lessonPageAdapter.setLessonList(realm.copyFromRealm(topic.getLessons().sort(Lesson.COL_SEQ)));
         dotsCount = lessonPageAdapter.getCount();
         if (dotsCount <= 0) return;
         dots = new ImageView[dotsCount];
