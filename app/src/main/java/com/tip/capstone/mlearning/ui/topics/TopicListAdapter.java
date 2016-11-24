@@ -22,9 +22,9 @@ import java.util.List;
 
 public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.ViewHolder> {
 
-    private List<Topic> topicList;
-    private Context context;
-    private TopicListView topicListView;
+    private final List<Topic> topicList;
+    private final Context context;
+    private final TopicListView topicListView;
 
     public TopicListAdapter(Context context, TopicListView topicListView) {
         this.context = context;
@@ -65,7 +65,7 @@ public class TopicListAdapter extends RecyclerView.Adapter<TopicListAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemTopicBinding itemTopicBinding;
+        private final ItemTopicBinding itemTopicBinding;
 
         public ViewHolder(ItemTopicBinding itemTopicBinding) {
             super(itemTopicBinding.getRoot());

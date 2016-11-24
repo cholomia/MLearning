@@ -7,8 +7,9 @@ import android.support.annotation.NonNull;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.tip.capstone.mlearning.R;
-import com.tip.capstone.mlearning.app.App;
 import com.tip.capstone.mlearning.databinding.ActivityMainBinding;
+import com.tip.capstone.mlearning.ui.assessment.AssessmentActivity;
+import com.tip.capstone.mlearning.ui.grades.GradesActivity;
 import com.tip.capstone.mlearning.ui.term.TermActivity;
 
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
@@ -33,7 +34,12 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void onAssessmentClicked() {
+        startActivity(new Intent(this, AssessmentActivity.class));
+    }
 
+    @Override
+    public void onGradesClicked() {
+        startActivity(new Intent(this, GradesActivity.class));
     }
 
     @Override

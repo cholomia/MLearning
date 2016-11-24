@@ -7,6 +7,8 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * @since 21/11/2016
  */
 
+@SuppressWarnings("WeakerAccess")
 public interface LessonView extends MvpView {
-    void showAlert(String title, String message);
+    // let view public for DataBinding uses
+    // TODO: 24/11/2016 Ready for future updates
 }

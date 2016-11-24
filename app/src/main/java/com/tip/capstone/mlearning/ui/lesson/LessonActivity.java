@@ -24,6 +24,10 @@ import com.tip.capstone.mlearning.ui.quiz.QuizActivity;
 
 import io.realm.Realm;
 
+/**
+ * @author pocholomia
+ * @since 18/11/2016
+ */
 public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
         implements LessonView, ViewPager.OnPageChangeListener {
 
@@ -35,20 +39,23 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
     private LessonPageAdapter lessonPageAdapter;
     private Topic topic;
 
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings("ConstantConditions") // assumes that toolbar is setup
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance(); // init realm
         binding = DataBindingUtil.setContentView(this, R.layout.activity_lesson);
+
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // checking for intent pass
         int topicId = getIntent().getIntExtra(Constant.ID, -1);
         if (topicId == -1) {
             Toast.makeText(this, "No Intent Extra Found", Toast.LENGTH_SHORT).show();
             finish();
         }
+        //check if has data
         topic = realm.where(Topic.class).equalTo(Constant.ID, topicId).findFirst();
         if (topic == null) {
             Toast.makeText(this, "No Topic Object Found", Toast.LENGTH_SHORT).show();
@@ -66,6 +73,9 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
 
     }
 
+    /**
+     * Show the Topic Objective on Dialog
+     */
     private void showObjectives() {
         new AlertDialog.Builder(this)
                 .setTitle(topic.getTitle())
@@ -121,6 +131,7 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
 
     @Override
     public void onPageSelected(int position) {
+        // for the view page counter/dots below the layout
         for (int i = 0; i < dotsCount; i++) {
             dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.non_selected_item_dot));
         }
@@ -133,6 +144,7 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
     }
 
     private void setUiPageViewController() {
+        // setup view page controller specially the counter indicator
         lessonPageAdapter.setLessonList(realm.copyFromRealm(topic.getLessons().sort(Lesson.COL_SEQ)));
         dotsCount = lessonPageAdapter.getCount();
         if (dotsCount <= 0) return;
@@ -156,12 +168,4 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
         dots[0].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.selected_item_dot));
     }
 
-    @Override
-    public void showAlert(String title, String message) {
-        new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Close", null)
-                .show();
-    }
 }

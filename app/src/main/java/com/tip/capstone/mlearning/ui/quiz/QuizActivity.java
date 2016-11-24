@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -24,7 +25,6 @@ import com.tip.capstone.mlearning.model.Question;
 import com.tip.capstone.mlearning.model.QuizGrade;
 import com.tip.capstone.mlearning.model.Topic;
 import com.tip.capstone.mlearning.model.UserAnswer;
-import com.tip.capstone.mlearning.ui.adapter.ChoiceListAdapter;
 import com.tip.capstone.mlearning.ui.adapter.SummaryListAdapter;
 
 import java.util.ArrayList;
@@ -33,6 +33,10 @@ import java.util.List;
 
 import io.realm.Realm;
 
+/**
+ * @author pocholomia
+ * @since 21/11/2016
+ */
 public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> implements QuizView {
 
     private static final String TAG = QuizActivity.class.getSimpleName();
@@ -47,49 +51,37 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        realm = Realm.getDefaultInstance();
+        setRetainInstance(true);
+        realm = Realm.getDefaultInstance(); // init realm db
+        // check for intent
         int id = getIntent().getIntExtra(Constant.ID, -1);
         if (id == -1) {
             Toast.makeText(getApplicationContext(), "No Intent Extra Found!", Toast.LENGTH_SHORT).show();
             finish();
         }
+        // check if has data
         topic = realm.where(Topic.class).equalTo(Constant.ID, id).findFirst();
         if (topic == null) {
             Toast.makeText(getApplicationContext(), "No Topic Data Found", Toast.LENGTH_SHORT).show();
             finish();
         }
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Short Quiz");
 
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz);
+        // assumes theme has toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // TODO: 24/11/2016 setup activity title on manifest instead of here
+        getSupportActionBar().setTitle("Short Quiz");
+        // setup RecyclerView
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-
-        choiceAdapter = new ChoiceListAdapter(this);
-
-        QuizGrade quizGrade = realm.where(QuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
-        if (quizGrade != null) {
-            // already taken the quiz
-            new AlertDialog.Builder(this)
-                    .setTitle("Retake Quiz?")
-                    .setMessage("If Submitted, it will overwrite previous grade!")
-                    .setCancelable(false)
-                    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            QuizActivity.this.finish();
-                        }
-                    })
-                    .show();
-        }
-
+        // setup adapter
+        choiceAdapter = new ChoiceListAdapter();
+        binding.recyclerView.setAdapter(choiceAdapter);
+        // setup additional data on layout using DataBinding
+        binding.setView(getMvpView());
+        String strNumItems = "Number of Items: " + topic.getQuestions().size();
+        binding.txtNumItems.setText(strNumItems);
         Log.d(TAG, "onCreate: realm is instantiated");
     }
 
@@ -97,6 +89,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                // TODO: 24/11/2016 override onBackPressed to alert user, do the same on AssessmentActivity
                 onBackPressed();
                 return true;
             default:
@@ -120,16 +113,40 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     @NonNull
     @Override
     public ViewState<QuizView> createViewState() {
+        setRetainInstance(true);
         return new QuizViewState();
     }
 
     @Override
     public void onNewViewStateInstance() {
+        // alert user that quiz already taken
+        QuizGrade quizGrade = realm.where(QuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
+        if (quizGrade != null) {
+            // already taken the quiz
+            new AlertDialog.Builder(this)
+                    .setTitle("Retake Quiz?")
+                    .setMessage("If Submitted, it will overwrite previous grade!")
+                    .setCancelable(false)
+                    .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            QuizActivity.this.finish();
+                        }
+                    })
+                    .show();
+        }
+        // setup data
         Log.d(TAG, "onNewViewStateInstance: applying algorithm to quiz realm results");
         ((QuizViewState) getViewState()).setCounter(0);
 
         userAnswerList = new ArrayList<>();
-        questionList = presenter.getShuffledQuestionList(realm.copyFromRealm(topic.getQuestionRealmList()));
+        questionList = presenter.getShuffledQuestionList(realm.copyFromRealm(topic.getQuestions()));
 
         ((QuizViewState) getViewState()).setUserAnswerList(userAnswerList);
         ((QuizViewState) getViewState()).setQuestionList(questionList);
@@ -138,14 +155,18 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
             onSetQuestion(questionList.get(((QuizViewState) getViewState()).getCounter()));
     }
 
+    /**
+     * @param question question to display
+     */
     private void onSetQuestion(Question question) {
-        binding.txtHeader.setText("Short Quiz for " + topic.getTitle());
+        String header = "Short Quiz for " + topic.getTitle();
+        binding.txtHeader.setText(header);
         binding.txtQuestion.setText((((QuizViewState) getViewState()).getCounter() + 1) + ".) " + question.getQuestion());
-        if (question.getQuestionType() == Constant.QUESTION_TYPE_MULTIPLE) {
+        if (question.getQuestion_type() == Constant.QUESTION_TYPE_MULTIPLE) {
             binding.recyclerView.setVisibility(View.VISIBLE);
             binding.etAnswer.setVisibility(View.GONE);
-            choiceAdapter.setChoiceList(question.getChoiceRealmList());
-        } else if (question.getQuestionType() == Constant.QUESTION_TYPE_IDENTIFICATION) {
+            choiceAdapter.setChoiceList(question.getChoices());
+        } else if (question.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
             binding.recyclerView.setVisibility(View.GONE);
             binding.etAnswer.setText("");
             binding.etAnswer.setVisibility(View.VISIBLE);
@@ -155,6 +176,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     @Override
     public void onPrevious() {
         if (((QuizViewState) getViewState()).getCounter() <= 0) {
+            // TODO: 24/11/2016 disable previous button instead of alert here if counter is 0
             new AlertDialog.Builder(this)
                     .setTitle("Exit?")
                     .setMessage("Are you sure you want to exit?")
@@ -183,13 +205,20 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
         userAnswer.setQuestionId(question.getId());
         userAnswer.setCorrectAnswer(question.getAnswer());
 
-        if (question.getQuestionType() == Constant.QUESTION_TYPE_MULTIPLE) {
+        if (question.getQuestion_type() == Constant.QUESTION_TYPE_MULTIPLE) {
             Choice choice = choiceAdapter.getSelectedChoice();
             if (choice != null) {
                 userAnswer.setUserAnswer(choice.getBody());
-                userAnswer.setChoiceType(choice.getChoiceType());
+                userAnswer.setChoiceType(choice.getChoice_type());
+            } else {
+                Snackbar.make(binding.getRoot(), "Select Answer", Snackbar.LENGTH_SHORT).show();
+                return;
             }
-        } else if (question.getQuestionType() == Constant.QUESTION_TYPE_IDENTIFICATION) {
+        } else if (question.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
+            if (binding.etAnswer.getText().toString().isEmpty()) {
+                Snackbar.make(binding.getRoot(), "Enter Answer", Snackbar.LENGTH_SHORT).show();
+                return;
+            }
             userAnswer.setUserAnswer(binding.etAnswer.getText().toString());
             userAnswer.setChoiceType(Constant.DETAIL_TYPE_IMAGE);
         }
@@ -206,7 +235,6 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            // todo: compute score and show answer summary
                             showSummary();
                             dialogInterface.dismiss();
                         }
@@ -232,6 +260,9 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
             onSetQuestion(questionList.get(counter));
     }
 
+    /**
+     * Show Dialog Susmmary
+     */
     private void showSummary() {
         DialogQuizSummaryBinding dialogBinding = DataBindingUtil.inflate(
                 getLayoutInflater(),
@@ -244,7 +275,8 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
             if (userAnswer.isCorrect()) score++;
         }
         dialogBinding.txtRawScore.setText(score + "/" + items);
-        dialogBinding.txtAverage.setText(presenter.getAverage(score, items) + "%");
+        String ave = presenter.getAverage(score, items) + "%";
+        dialogBinding.txtAverage.setText(ave);
 
         dialogBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         dialogBinding.recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -275,7 +307,8 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
                     public void onClick(DialogInterface dialogInterface, int i) {
                         QuizActivity.this.finish();
                     }
-                });
+                })
+                .show();
     }
 
 }

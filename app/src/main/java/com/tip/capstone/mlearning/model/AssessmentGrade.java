@@ -47,4 +47,11 @@ public class AssessmentGrade extends RealmObject {
     public void setDateUpdated(long dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
+
+    /**
+     * @return average of the grade score/items * 50 + 50
+     */
+    public double average() {
+        return ((rawScore / itemCount) * 50) + 50;
+    }
 }

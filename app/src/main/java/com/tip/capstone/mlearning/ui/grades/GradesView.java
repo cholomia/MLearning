@@ -7,5 +7,9 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * @since 22/11/2016
  */
 
+@SuppressWarnings("WeakerAccess")
 public interface GradesView extends MvpView {
+
+    // make view public for DataBinding uses
+    // TODO: 24/11/2016 Ready for future updates
 }

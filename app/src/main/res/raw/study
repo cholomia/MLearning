@@ -23,6 +23,41 @@
             "topic": 5
           }
         ],
+        "questions": [
+          {
+            "id": 1,
+            "choices": [
+              {
+                "id": 1,
+                "body": "baby don't hurt me",
+                "question": 1,
+                "choice_type": 1
+              },
+              {
+                "id": 2,
+                "body": "baby don't hurt you",
+                "question": 1,
+                "choice_type": 1
+              },
+              {
+                "id": 3,
+                "body": "baby don't hurt too",
+                "question": 1,
+                "choice_type": 1
+              },
+              {
+                "id": 4,
+                "body": "baby don't hurt us",
+                "question": 1,
+                "choice_type": 1
+              }
+            ],
+            "question": "What is love?",
+            "answer": "baby don't hurt me",
+            "topic": 5,
+            "question_type": 1
+          }
+        ],
         "sequence": 1,
         "title": "Introduction to Quality Control",
         "description": "---",
@@ -51,6 +86,7 @@
             "topic": 6
           }
         ],
+        "questions": [],
         "sequence": 2,
         "title": "Introduction to Pharmaceutical Analysis",
         "description": "--",
@@ -193,6 +229,7 @@
             "topic": 7
           }
         ],
+        "questions": [],
         "sequence": 3,
         "title": "Official Methods in Pharmaceutical Analysis",
         "description": "--",
@@ -285,6 +322,7 @@
             "topic": 8
           }
         ],
+        "questions": [],
         "sequence": 4,
         "title": "A. Volumetric Method: Neutralization",
         "description": "--",
@@ -450,6 +488,7 @@
             "topic": 10
           }
         ],
+        "questions": [],
         "sequence": 6,
         "title": "Divisions of Neutralization Titration",
         "description": "--",
@@ -576,6 +615,7 @@
             "topic": 11
           }
         ],
+        "questions": [],
         "sequence": 1,
         "title": "Precipitation Titration",
         "description": "Explain the Principle of Precipitation Titration",
@@ -749,6 +789,7 @@
             "topic": 12
           }
         ],
+        "questions": [],
         "sequence": 2,
         "title": "Complex Formation Titrations",
         "description": "--",
@@ -964,6 +1005,7 @@
             "topic": 14
           }
         ],
+        "questions": [],
         "sequence": 3,
         "title": "Redox Titrations",
         "description": "----",
@@ -1126,6 +1168,7 @@
             "topic": 17
           }
         ],
+        "questions": [],
         "sequence": 1,
         "title": "Special Methods Used in Pharmaceutical Analysis",
         "description": "------",

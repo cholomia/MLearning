@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_reset_grades"
         android:orderInCategory="100"
-        android:title="Reset Grades"
+        android:title="@string/reset_grades"
         app:showAsAction="never" />
 </menu>

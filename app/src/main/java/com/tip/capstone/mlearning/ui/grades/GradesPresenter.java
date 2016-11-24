@@ -7,6 +7,6 @@ import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
  * @since 22/11/2016
  */
 
-public class GradesPresenter extends MvpNullObjectBasePresenter<GradesView> {
-
+class GradesPresenter extends MvpNullObjectBasePresenter<GradesView> {
+    // TODO: 24/11/2016 Ready for future updates of the app e.g. Network Calls
 }

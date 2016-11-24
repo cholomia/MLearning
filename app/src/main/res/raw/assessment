@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "assessmentchoices": [
+      {
+        "id": 1,
+        "body": "baby don't hurt me",
+        "assessment": 1,
+        "choice_type": 1
+      },
+      {
+        "id": 2,
+        "body": "baby don't hurt too",
+        "assessment": 1,
+        "choice_type": 1
+      },
+      {
+        "id": 3,
+        "body": "baby don't hurt us",
+        "assessment": 1,
+        "choice_type": 1
+      },
+      {
+        "id": 4,
+        "body": "baby don't hurt you",
+        "assessment": 1,
+        "choice_type": 1
+      }
+    ],
+    "question": "What is love?",
+    "answer": "baby don't hurt me",
+    "question_type": 1
+  },
+  {
+    "id": 2,
+    "assessmentchoices": [
+      {
+        "id": 5,
+        "body": "ios",
+        "assessment": 2,
+        "choice_type": 1
+      },
+      {
+        "id": 6,
+        "body": "os",
+        "assessment": 2,
+        "choice_type": 1
+      },
+      {
+        "id": 7,
+        "body": "cellphone",
+        "assessment": 2,
+        "choice_type": 1
+      },
+      {
+        "id": 8,
+        "body": "robot",
+        "assessment": 2,
+        "choice_type": 1
+      }
+    ],
+    "question": "What is android?",
+    "answer": "os",
+    "question_type": 1
+  }
+]

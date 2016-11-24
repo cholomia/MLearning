@@ -5,10 +5,10 @@ import io.realm.annotations.PrimaryKey;
 
 /**
  * @author pocholomia
- * @since 21/11/2016
+ * @since 24/11/2016
  */
 
-public class Choice extends RealmObject {
+public class AssessmentChoice extends RealmObject {
 
     @PrimaryKey
     private int id;
@@ -47,4 +47,5 @@ public class Choice extends RealmObject {
     public void setBody(String body) {
         this.body = body;
     }
+
 }

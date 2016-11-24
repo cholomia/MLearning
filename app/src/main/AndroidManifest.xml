@@ -29,7 +29,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.quiz.QuizActivity" />
         <activity android:name=".ui.assessment.AssessmentActivity" />
-        <activity android:name=".ui.grades.GradesActivity"></activity>
+        <activity android:name=".ui.grades.GradesActivity" />
     </application>
 
 </manifest>

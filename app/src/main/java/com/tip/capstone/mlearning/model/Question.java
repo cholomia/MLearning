@@ -15,8 +15,8 @@ public class Question extends RealmObject {
     private int id;
     private String question;
     private String answer;
-    private int questionType;
-    private RealmList<Choice> choiceRealmList;
+    private int question_type;
+    private RealmList<Choice> choices;
 
     public int getId() {
         return id;
@@ -42,19 +42,19 @@ public class Question extends RealmObject {
         this.answer = answer;
     }
 
-    public int getQuestionType() {
-        return questionType;
+    public int getQuestion_type() {
+        return question_type;
     }
 
-    public void setQuestionType(int questionType) {
-        this.questionType = questionType;
+    public void setQuestion_type(int question_type) {
+        this.question_type = question_type;
     }
 
-    public RealmList<Choice> getChoiceRealmList() {
-        return choiceRealmList;
+    public RealmList<Choice> getChoices() {
+        return choices;
     }
 
-    public void setChoiceRealmList(RealmList<Choice> choiceRealmList) {
-        this.choiceRealmList = choiceRealmList;
+    public void setChoices(RealmList<Choice> choices) {
+        this.choices = choices;
     }
 }

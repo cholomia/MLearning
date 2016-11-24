@@ -25,31 +25,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> view.onStudyClicked()}"
-                android:text="Study" />
+                android:text="@string/study" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> view.onAssessmentClicked()}"
-                android:text="Assessment" />
+                android:text="@string/assessment" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> view.onGradesClicked()}"
+                android:text="@string/grades" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> view.onVideosClicked()}"
-                android:text="Videos" />
+                android:text="@string/videos" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> view.onSimulationClicked()}"
-                android:text="Simulation" />
+                android:text="@string/simulation" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> view.onGlossaryClicked()}"
-                android:text="Glossary" />
+                android:text="@string/glossary" />
 
         </LinearLayout>
 

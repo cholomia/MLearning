@@ -17,7 +17,7 @@ import java.util.List;
 
 class LessonPageAdapter extends FragmentPagerAdapter {
 
-    private List<Lesson> lessonList;
+    private final List<Lesson> lessonList;
 
     LessonPageAdapter(FragmentManager fm) {
         super(fm);

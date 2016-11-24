@@ -17,16 +17,17 @@ import java.util.List;
 /**
  * @author pocholomia
  * @since 22/11/2016
+ * List Adapter for Grades
  */
 
-public class GradesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class GradesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_HEADER = 0;
     private static final int VIEW_ASSESSMENT = 1;
     private static final int VIEW_GRADE = 2;
-    private List<Grades> gradesList;
+    private final List<Grades> gradesList;
 
-    public GradesListAdapter() {
+    GradesListAdapter() {
         this.gradesList = new ArrayList<>();
     }
 
@@ -93,36 +94,39 @@ public class GradesListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return gradesList.size();
     }
 
-    public void setGradesList(List<Grades> gradesList) {
+    /**
+     * @param gradesList list of grades to display
+     */
+    void setGradesList(List<Grades> gradesList) {
         this.gradesList.clear();
         this.gradesList.addAll(gradesList);
         notifyDataSetChanged();
     }
 
-    public class HeaderViewHolder extends RecyclerView.ViewHolder {
-        private ItemGradesHeaderBinding itemGradesHeaderBinding;
+    private class HeaderViewHolder extends RecyclerView.ViewHolder {
+        private final ItemGradesHeaderBinding itemGradesHeaderBinding;
 
-        public HeaderViewHolder(ItemGradesHeaderBinding itemGradesHeaderBinding) {
+        HeaderViewHolder(ItemGradesHeaderBinding itemGradesHeaderBinding) {
             super(itemGradesHeaderBinding.getRoot());
             this.itemGradesHeaderBinding = itemGradesHeaderBinding;
         }
     }
 
-    public class AssessmentViewHolder extends RecyclerView.ViewHolder {
+    private class AssessmentViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemGradeAssessmentBinding itemGradeAssessmentBinding;
+        private final ItemGradeAssessmentBinding itemGradeAssessmentBinding;
 
-        public AssessmentViewHolder(ItemGradeAssessmentBinding itemGradeAssessmentBinding) {
+        AssessmentViewHolder(ItemGradeAssessmentBinding itemGradeAssessmentBinding) {
             super(itemGradeAssessmentBinding.getRoot());
             this.itemGradeAssessmentBinding = itemGradeAssessmentBinding;
         }
     }
 
-    public class GradesViewHolder extends RecyclerView.ViewHolder {
+    private class GradesViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemGradesBinding itemGradesBinding;
+        private final ItemGradesBinding itemGradesBinding;
 
-        public GradesViewHolder(ItemGradesBinding itemGradesBinding) {
+        GradesViewHolder(ItemGradesBinding itemGradesBinding) {
             super(itemGradesBinding.getRoot());
             this.itemGradesBinding = itemGradesBinding;
         }

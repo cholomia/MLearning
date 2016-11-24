@@ -21,7 +21,7 @@ public class Topic extends RealmObject {
     private String objective;
     private String image;
     private RealmList<Lesson> lessons;
-    private RealmList<Question> questionRealmList;
+    private RealmList<Question> questions;
 
     public int getId() {
         return id;
@@ -79,11 +79,11 @@ public class Topic extends RealmObject {
         this.lessons = lessons;
     }
 
-    public RealmList<Question> getQuestionRealmList() {
-        return questionRealmList;
+    public RealmList<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionRealmList(RealmList<Question> questionRealmList) {
-        this.questionRealmList = questionRealmList;
+    public void setQuestions(RealmList<Question> questions) {
+        this.questions = questions;
     }
 }

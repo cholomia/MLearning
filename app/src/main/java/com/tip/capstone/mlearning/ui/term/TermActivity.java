@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityTermBinding;
-import com.tip.capstone.mlearning.helper.StringHelper;
 import com.tip.capstone.mlearning.model.Term;
 import com.tip.capstone.mlearning.ui.topics.TopicsListActivity;
 
@@ -24,7 +22,6 @@ import io.realm.RealmResults;
 
 public class TermActivity extends MvpActivity<TermView, TermPresenter> implements TermView {
 
-    private ActivityTermBinding binding;
     private Realm realm;
     private RealmResults<Term> termRealmResults;
     private TermListAdapter termListAdapter;
@@ -35,7 +32,7 @@ public class TermActivity extends MvpActivity<TermView, TermPresenter> implement
         super.onCreate(savedInstanceState);
         realm = Realm.getDefaultInstance();
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_term);
+        ActivityTermBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_term);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -85,12 +82,4 @@ public class TermActivity extends MvpActivity<TermView, TermPresenter> implement
         startActivity(intent);
     }
 
-    @Override
-    public void showAlert(String title, String message) {
-        new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Close", null)
-                .show();
-    }
 }

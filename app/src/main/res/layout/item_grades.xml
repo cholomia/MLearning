@@ -20,7 +20,7 @@
             android:text="@{grade.title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_marginStartPercent="5%"
-            app:layout_widthPercent="55%" />
+            app:layout_widthPercent="35%" />
 
         <TextView
             android:id="@+id/txt_raw_score"
@@ -30,7 +30,7 @@
             android:gravity="end"
             android:text='@{grade.quizGrade != null ? grade.quizGrade.rawScore + "/" + grade.quizGrade.itemCount : "N/A"}'
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_widthPercent="20%" />
+            app:layout_widthPercent="30%" />
 
         <TextView
             android:id="@+id/txt_average"
@@ -40,7 +40,7 @@
             android:gravity="end"
             android:text='@{grade.quizGrade != null ? grade.quizGrade.average() + "%" : "N/A"}'
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_widthPercent="20%" />
+            app:layout_widthPercent="30%" />
 
     </android.support.percent.PercentRelativeLayout>
 

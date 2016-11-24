@@ -10,10 +10,18 @@ import java.io.InputStreamReader;
 /**
  * @author pocholomia
  * @since 18/11/2016
+ * Utilities ofr String
  */
 
 public class StringHelper {
 
+    /**
+     * Get the String inside the raw file.
+     *
+     * @param ctx   the context calling this function/method
+     * @param resId the resource id of the raw file
+     * @return the String inside the raw file
+     */
     public static String readRawTextFile(Context ctx, int resId) {
         InputStream inputStream = ctx.getResources().openRawResource(resId);
 

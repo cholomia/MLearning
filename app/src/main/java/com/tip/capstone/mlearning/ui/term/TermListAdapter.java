@@ -19,8 +19,8 @@ import java.util.List;
 
 public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.ViewHolder> {
 
-    private List<Term> termList;
-    private TermView termView;
+    private final List<Term> termList;
+    private final TermView termView;
 
     public TermListAdapter(TermView termView) {
         this.termView = termView;
@@ -55,7 +55,7 @@ public class TermListAdapter extends RecyclerView.Adapter<TermListAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemTermBinding itemTermBinding;
+        private final ItemTermBinding itemTermBinding;
 
         public ViewHolder(ItemTermBinding itemTermBinding) {
             super(itemTermBinding.getRoot());

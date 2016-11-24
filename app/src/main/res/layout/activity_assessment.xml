@@ -23,7 +23,6 @@
             android:id="@+id/txt_num_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Number of Items: 20"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
 
         <LinearLayout
@@ -38,7 +37,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="1.) Sample Question for the lesson."
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             <!-- Visible if question type is IDENTIFICATION -->
@@ -47,7 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@android:drawable/edit_text" />
+                android:background="@android:drawable/edit_text"
+                android:hint="@string/your_answer"
+                tools:ignore="LabelFor" />
 
             <!-- Visible if question type is MULTIPLE CHOICE -->
             <android.support.v7.widget.RecyclerView
@@ -63,16 +63,20 @@
             android:orientation="horizontal">
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:onClick="@{() -> view.onPrevious()}"
-                android:text="Previous" />
+                android:text="@string/previous" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:onClick="@{() -> view.onNext()}"
-                android:text="Next" />
+                android:text="@string/next" />
 
         </LinearLayout>
 

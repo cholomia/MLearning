@@ -29,7 +29,7 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
             Question randomQuestion = questionList.get(random);
             questionList.set(random, questionList.get(i));
 
-            RealmList<Choice> choiceList = randomQuestion.getChoiceRealmList();
+            RealmList<Choice> choiceList = randomQuestion.getChoices();
             int m = choiceList.size();
             for (int j = 0; j < m; j++) {
                 int r = getRandomInt(j, m);
@@ -37,7 +37,7 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
                 choiceList.set(r, choiceList.get(j));
                 choiceList.set(j, randomChoice);
             }
-            randomQuestion.setChoiceRealmList(choiceList);
+            randomQuestion.setChoices(choiceList);
 
 
             questionList.set(i, randomQuestion);
@@ -50,11 +50,16 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
      * @param size size of the list
      * @return random index to used
      */
-    public int getRandomInt(int i, int size) {
-        return i + (int) (Math.random() * (size - 1));
+    private int getRandomInt(int i, int size) {
+        return i + (int) (Math.random() * (size - i));
     }
 
-    public int getAverage(int score, int items) {
+    /**
+     * @param score raw score
+     * @param items total number of items
+     * @return return average using score/items * 50 + 50
+     */
+    int getAverage(int score, int items) {
         return ((score / items) * 50) + 50;
     }
 }

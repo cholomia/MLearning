@@ -10,7 +10,7 @@
             type="com.tip.capstone.mlearning.model.UserAnswer" />
     </data>
 
-    <LinearLayout
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your Answer:"
+                android:text="@string/your_answer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
@@ -39,18 +39,19 @@
                 android:layout_height="wrap_content"
                 android:text="@{answer.userAnswer}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:visibility="@{answer.choiceType == 0 ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{answer.choiceType == 1 ? View.VISIBLE : View.GONE}" />
 
             <ImageView
                 android:id="@+id/img_user_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="@{answer.choiceType == 1 ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{answer.choiceType == 2 ? View.VISIBLE : View.GONE}"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Correct Answer:"
+                android:text="@string/correct_answer"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
@@ -58,13 +59,14 @@
                 android:layout_height="wrap_content"
                 android:text="@{answer.correctAnswer}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:visibility="@{answer.choiceType == 0 ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{answer.choiceType == 1 ? View.VISIBLE : View.GONE}" />
 
             <ImageView
                 android:id="@+id/img_correct_answer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="@{answer.choiceType == 1 ? View.VISIBLE : View.GONE}" />
+                android:visibility="@{answer.choiceType == 2 ? View.VISIBLE : View.GONE}"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
 

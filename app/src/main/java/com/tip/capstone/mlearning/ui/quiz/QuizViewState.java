@@ -3,18 +3,23 @@ package com.tip.capstone.mlearning.ui.quiz;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.hannesdorfmann.mosby.mvp.viewstate.RestorableViewState;
 import com.tip.capstone.mlearning.model.Question;
 import com.tip.capstone.mlearning.model.UserAnswer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author pocholomia
+ * @see com.tip.capstone.mlearning.ui.assessment.AssessmentViewState
+ * similar to AssessmentViewState
  * @since 21/11/2016
  */
 
-public class QuizViewState implements RestorableViewState<QuizView> {
+class QuizViewState implements RestorableViewState<QuizView> {
     private static final String KEY_COUNTER = "key_counter";
     private static final String KEY_ANSWER = "key_user_answer_list";
     private static final String KEY_QUESTION = "key_question_list";
@@ -26,13 +31,35 @@ public class QuizViewState implements RestorableViewState<QuizView> {
     @Override
     public void saveInstanceState(@NonNull Bundle out) {
         out.putInt(KEY_COUNTER, counter);
-        // todo: convert list user answer and question to json string then save on bundle out
+        // todo: save identification input and selected on multiple choice
+        Gson gson = new GsonBuilder().create();
+        ArrayList<String> questionJson = new ArrayList<>();
+        for (Question question : questionList) {
+            questionJson.add(gson.toJson(question));
+        }
+        ArrayList<String> userAnswerJson = new ArrayList<>();
+        for (UserAnswer userAnswer : userAnswerList) {
+            userAnswerJson.add(gson.toJson(userAnswer));
+        }
+        out.putStringArrayList(KEY_QUESTION, questionJson);
+        out.putStringArrayList(KEY_ANSWER, userAnswerJson);
     }
 
     @Override
     public RestorableViewState<QuizView> restoreInstanceState(Bundle in) {
         counter = in.getInt(KEY_COUNTER, 0);
-        // todo: get json string of question and answer to list then assigned to field
+        // todo: get identification input and selected on multiple choice
+        Gson gson = new GsonBuilder().create();
+        ArrayList<String> userAnswerJson = in.getStringArrayList(KEY_ANSWER);
+        ArrayList<String> questionJson = in.getStringArrayList(KEY_QUESTION);
+        questionList = new ArrayList<>();
+        for (String question : questionJson != null ? questionJson : new ArrayList<String>()) {
+            questionList.add(gson.fromJson(question, Question.class));
+        }
+        userAnswerList = new ArrayList<>();
+        for (String answer : userAnswerJson != null ? userAnswerJson : new ArrayList<String>()) {
+            userAnswerList.add(gson.fromJson(answer, UserAnswer.class));
+        }
         return this;
     }
 
@@ -41,27 +68,27 @@ public class QuizViewState implements RestorableViewState<QuizView> {
         view.restoreData(counter, questionList, userAnswerList);
     }
 
-    public void setCounter(int counter) {
+    void setCounter(int counter) {
         this.counter = counter;
     }
 
-    public int getCounter() {
+    int getCounter() {
         return counter;
     }
 
-    public void decrementCounter() {
+    void decrementCounter() {
         counter--;
     }
 
-    public void incrementCounter() {
+    void incrementCounter() {
         counter++;
     }
 
-    public void setUserAnswerList(List<UserAnswer> userAnswerList) {
+    void setUserAnswerList(List<UserAnswer> userAnswerList) {
         this.userAnswerList = userAnswerList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
+    void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
     }
 }

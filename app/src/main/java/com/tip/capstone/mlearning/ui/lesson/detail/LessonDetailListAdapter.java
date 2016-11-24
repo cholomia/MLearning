@@ -1,8 +1,6 @@
 package com.tip.capstone.mlearning.ui.lesson.detail;
 
-import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,22 +22,29 @@ import java.util.List;
 /**
  * @author pocholomia
  * @since 18/11/2016
+ * Adapter for Lesson Details
  */
 
-public class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int VIEW_HEADER = 0;
     private static final int VIEW_TEXT = 1;
     private static final int VIEW_IMAGE = 2;
     private static final String TAG = LessonDetailListAdapter.class.getSimpleName();
 
-    private Context context;
-    private Lesson lesson;
-    private List<LessonDetail> lessonDetails;
+    private final Lesson lesson;
+    private final List<LessonDetail> lessonDetails;
+    private final LessonDetailListView view;
 
-    public LessonDetailListAdapter(Context context, Lesson lesson) {
-        this.context = context;
+    /**
+     * Constructor
+     *
+     * @param lesson lesson of the list (for header purposes)
+     * @param view   for listener of items
+     */
+    LessonDetailListAdapter(Lesson lesson, LessonDetailListView view) {
         this.lesson = lesson;
+        this.view = view;
         lessonDetails = new ArrayList<>();
     }
 
@@ -48,6 +53,7 @@ public class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.V
         if (position == 0 && lesson != null) {
             return VIEW_HEADER;
         } else {
+            // decrement index for list if has lesson
             int index = lesson != null ? position - 1 : position;
             switch (lessonDetails.get(index).getBody_type()) {
                 case Constant.DETAIL_TYPE_TEXT:
@@ -99,6 +105,7 @@ public class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.V
                 LessonDetailTextViewHolder lessonDetailTextViewHolder = (LessonDetailTextViewHolder) holder;
                 lessonDetailTextViewHolder.itemLessonDetailTextBinding
                         .setLessonDetail(lessonDetails.get(lesson != null ? position - 1 : position));
+                lessonDetailTextViewHolder.itemLessonDetailTextBinding.setView(view);
                 break;
             case VIEW_IMAGE:
                 LessonDetailImageViewHolder lessonDetailImageViewHolder = (LessonDetailImageViewHolder) holder;
@@ -106,10 +113,8 @@ public class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.V
                         .setLessonDetail(lessonDetails.get(lesson != null ? position - 1 : position));
                 Log.d(TAG, "onBindViewHolder: " + lessonDetails.get(lesson != null ? position - 1 : position).getBody());
 
-                Glide.with(context)
-                        /*.load(ImageHelper.getResourceId(context,
-                                lessonDetails.get(lesson != null ? position - 1 : position).getBody()))*/
-                        .load(ImageHelper.getResourceId(context,
+                Glide.with(holder.itemView.getContext())
+                        .load(ImageHelper.getResourceId(holder.itemView.getContext(),
                                 lessonDetails.get(lesson != null ? position - 1 : position).getBody()))
                         .into(lessonDetailImageViewHolder.itemLessonDetailImageBinding.imageLessonDetail);
                 break;
@@ -123,34 +128,37 @@ public class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.V
         return size;
     }
 
-    public void setLessonDetails(List<LessonDetail> lessonDetails) {
+    /**
+     * @param lessonDetails list of lesson details to display
+     */
+    void setLessonDetails(List<LessonDetail> lessonDetails) {
         this.lessonDetails.clear();
         this.lessonDetails.addAll(lessonDetails);
         notifyDataSetChanged();
     }
 
-    public class LessonHeaderViewHolder extends RecyclerView.ViewHolder {
-        private ItemLessonHeaderBinding itemLessonHeaderBinding;
+    private class LessonHeaderViewHolder extends RecyclerView.ViewHolder {
+        private final ItemLessonHeaderBinding itemLessonHeaderBinding;
 
-        public LessonHeaderViewHolder(ItemLessonHeaderBinding itemLessonHeaderBinding) {
+        LessonHeaderViewHolder(ItemLessonHeaderBinding itemLessonHeaderBinding) {
             super(itemLessonHeaderBinding.getRoot());
             this.itemLessonHeaderBinding = itemLessonHeaderBinding;
         }
     }
 
-    public class LessonDetailTextViewHolder extends RecyclerView.ViewHolder {
-        private ItemLessonDetailTextBinding itemLessonDetailTextBinding;
+    private class LessonDetailTextViewHolder extends RecyclerView.ViewHolder {
+        private final ItemLessonDetailTextBinding itemLessonDetailTextBinding;
 
-        public LessonDetailTextViewHolder(ItemLessonDetailTextBinding itemLessonDetailTextBinding) {
+        LessonDetailTextViewHolder(ItemLessonDetailTextBinding itemLessonDetailTextBinding) {
             super(itemLessonDetailTextBinding.getRoot());
             this.itemLessonDetailTextBinding = itemLessonDetailTextBinding;
         }
     }
 
-    public class LessonDetailImageViewHolder extends RecyclerView.ViewHolder {
-        private ItemLessonDetailImageBinding itemLessonDetailImageBinding;
+    private class LessonDetailImageViewHolder extends RecyclerView.ViewHolder {
+        private final ItemLessonDetailImageBinding itemLessonDetailImageBinding;
 
-        public LessonDetailImageViewHolder(ItemLessonDetailImageBinding itemLessonDetailImageBinding) {
+        LessonDetailImageViewHolder(ItemLessonDetailImageBinding itemLessonDetailImageBinding) {
             super(itemLessonDetailImageBinding.getRoot());
             this.itemLessonDetailImageBinding = itemLessonDetailImageBinding;
         }

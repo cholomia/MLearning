@@ -8,9 +8,9 @@ import com.tip.capstone.mlearning.model.Term;
  * @since 18/11/2016
  */
 
+@SuppressWarnings("WeakerAccess")
 public interface TermView extends MvpView {
 
     void onTermClicked(Term term);
 
-    void showAlert(String title, String message);
 }

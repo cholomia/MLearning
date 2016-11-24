@@ -25,6 +25,10 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+/**
+ * @author pocholomia
+ * @since 22/11/2016
+ */
 public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> implements GradesView {
 
     private Realm realm;
@@ -37,17 +41,24 @@ public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> imp
         realm = Realm.getDefaultInstance();
         ActivityGradesBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_grades);
 
+        // assumes that theme has toolbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Grades");
 
+        // setup RecyclerView and adapter
         adapter = new GradesListAdapter();
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
+
+        getData();
     }
 
+    /**
+     * Setup the Grades Data for both Short Quiz and Final Assessment
+     */
     private void getData() {
         List<Grades> gradesList = new ArrayList<>();
         RealmResults<Term> termRealmResults = realm.where(Term.class).findAllSorted(Term.COL_SEQ);
@@ -80,8 +91,9 @@ public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> imp
         AssessmentGrade assessmentGrade = realm.where(AssessmentGrade.class).findFirst();
 
         Grades gradeAssessmentHeader = new Grades();
+        gradeAssessmentHeader.setTitle("Assessment");
         gradeAssessmentHeader.setSequence(gradesList.size() + 1);
-        gradeAssessmentHeader.setAssessmentGrade(assessmentGrade != null ? realm.copyFromRealm(assessmentGrade) : null);
+        gradeAssessmentHeader.setAssessmentGrade(assessmentGrade != null ? realm.copyFromRealm(assessmentGrade) : new AssessmentGrade());
         gradesList.add(gradeAssessmentHeader);
 
         adapter.setGradesList(gradesList);

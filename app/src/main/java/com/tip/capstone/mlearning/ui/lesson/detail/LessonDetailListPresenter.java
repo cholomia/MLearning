@@ -6,5 +6,6 @@ import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
  * @author pocholomia
  * @since 18/11/2016
  */
-public class LessonDetailListPresenter extends MvpNullObjectBasePresenter<LessonDetailListView> {
+class LessonDetailListPresenter extends MvpNullObjectBasePresenter<LessonDetailListView> {
+    // TODO: 24/11/2016 Ready for future updates
 }

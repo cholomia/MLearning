@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">MLearning</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_lesson">LessonActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reset_grades">Reset Grades</string>
+    <string name="quiz">Quiz</string>
+    <string name="score">Score</string>
+    <string name="average">Average</string>
+    <string name="topic">Topic</string>
+    <string name="study">Study</string>
+    <string name="assessment">Assessment</string>
+    <string name="grades">Grades</string>
+    <string name="videos">Videos</string>
+    <string name="simulation">Simulation</string>
+    <string name="glossary">Glossary</string>
+    <string name="your_answer">Your Answer:</string>
+    <string name="raw_score">Raw Score</string>
+    <string name="correct_answer">Correct Answer:</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 </resources>
