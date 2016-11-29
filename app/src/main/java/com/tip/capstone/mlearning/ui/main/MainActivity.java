@@ -11,6 +11,7 @@ import com.tip.capstone.mlearning.databinding.ActivityMainBinding;
 import com.tip.capstone.mlearning.ui.assessment.AssessmentActivity;
 import com.tip.capstone.mlearning.ui.grades.GradesActivity;
 import com.tip.capstone.mlearning.ui.term.TermActivity;
+import com.tip.capstone.mlearning.ui.videos.VideoListActivity;
 
 public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView {
 
@@ -44,7 +45,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void onVideosClicked() {
-
+        startActivity(new Intent(this, VideoListActivity.class));
     }
 
     @Override

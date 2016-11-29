@@ -14,4 +14,8 @@ public class Constant {
 
     public static final int QUESTION_TYPE_MULTIPLE = 1;
     public static final int QUESTION_TYPE_IDENTIFICATION = 2;
+
+    public static final String RES_ID = "res_id";
+    public static final String RAW_NAME_WITHOUT_EXT = "raw_name_without_extension";
+    public static final String VIDEO_TITLE = "video_title";
 }
