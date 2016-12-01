@@ -270,7 +270,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
                 null,
                 false);
         int score = 0;
-        int items = userAnswerList.size();
+        final int items = userAnswerList.size();
         for (UserAnswer userAnswer : userAnswerList) {
             if (userAnswer.isCorrect()) score++;
         }
@@ -286,14 +286,16 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
         summaryListAdapter.setUserAnswerList(userAnswerList);
         dialogBinding.recyclerView.setAdapter(summaryListAdapter);
 
-        final QuizGrade quizGrade = new QuizGrade();
-        quizGrade.setId(topic.getId());
-        quizGrade.setRawScore(score);
-        quizGrade.setItemCount(items);
-        quizGrade.setDateUpdated(new Date().getTime());
+
+        final int finalScore = score;
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
+                QuizGrade quizGrade = new QuizGrade();
+                quizGrade.setId(topic.getId());
+                quizGrade.setRawScore(finalScore);
+                quizGrade.setItemCount(items);
+                quizGrade.setDateUpdated(new Date().getTime());
                 realm.copyToRealmOrUpdate(quizGrade);
             }
         });

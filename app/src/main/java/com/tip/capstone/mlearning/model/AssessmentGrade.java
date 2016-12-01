@@ -52,6 +52,6 @@ public class AssessmentGrade extends RealmObject {
      * @return average of the grade score/items * 50 + 50
      */
     public double average() {
-        return ((rawScore / itemCount) * 50) + 50;
+        return (((double) rawScore / (double) itemCount) * 50.0) + 50.0;
     }
 }

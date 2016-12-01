@@ -3,69 +3,6 @@
     "id": 1,
     "topics": [
       {
-        "id": 5,
-        "lessons": [
-          {
-            "id": 5,
-            "lessondetails": [
-              {
-                "id": 2,
-                "sequence": 1,
-                "body": "The term “quality” as applied to a drug product has been defined as the sum of all factors which contribute directly or indirectly to the safety, effectiveness, and reliability of the product. These properties are built into drug products through research and during the manufacturing process by procedures collectively referred to as “quality control”. Quality control guarantees within reasonable limits that a drug product (1) is free of impurities, (2) is physically and chemically stable, (3) contains the amount of active ingredient(s) as stated on the label, and (4) provides optimal release of active ingredient(s) when the product is administered. Of the four properties listed, item 3 is usually emphasized in quantitative pharmaceutical chemistry. The others are generally considered in other courses of the curriculum. \r\n Standards for drug quality are set by both state and federal agencies. At the federal level drug-quality requirements are set through an organization known as the United States Pharmacopeia Convention, inc., a nonprofit corporation composed of representatives from all accredited colleges and schools of pharmacy and medicine in the country, every state pharmaceutical and medical association and many other national associations such as the American Pharmaceutical Association and the American Medical Association, and various department of the federal government. Drugs are selected for inclusion in a particular revision by a committee composed of medical experts throughout the country. Drug-quality standards for these drugs are then set by medical and pharmaceutical scientists of many disciplines, who represent educational institutions, the federal government, and industry.",
-                "caption": "",
-                "lesson": 5,
-                "body_type": 1
-              }
-            ],
-            "sequence": 1,
-            "title": "Quality Control",
-            "description": "",
-            "topic": 5
-          }
-        ],
-        "questions": [
-          {
-            "id": 1,
-            "choices": [
-              {
-                "id": 1,
-                "body": "baby don't hurt me",
-                "question": 1,
-                "choice_type": 1
-              },
-              {
-                "id": 2,
-                "body": "baby don't hurt you",
-                "question": 1,
-                "choice_type": 1
-              },
-              {
-                "id": 3,
-                "body": "baby don't hurt too",
-                "question": 1,
-                "choice_type": 1
-              },
-              {
-                "id": 4,
-                "body": "baby don't hurt us",
-                "question": 1,
-                "choice_type": 1
-              }
-            ],
-            "question": "What is love?",
-            "answer": "baby don't hurt me",
-            "topic": 5,
-            "question_type": 1
-          }
-        ],
-        "sequence": 1,
-        "title": "Introduction to Quality Control",
-        "description": "---",
-        "objective": "Course Orientation",
-        "image": "",
-        "term": 1
-      },
-      {
         "id": 6,
         "lessons": [
           {
@@ -74,7 +11,15 @@
               {
                 "id": 3,
                 "sequence": 1,
-                "body": "Quantitative Pharmaceutical Chemistry may be define as the application of the procedures analytical chemistry (1) to the analysis and determination of the purity and quality of drugs and chemicals used in pharmacy, especially those official in the United States pharmacopeia and the National Formulary (2) to the analysis of the chemical constituents found in the human body whose altered concentrations during disease  states serve as diagnostic aids in the practice of medicine, and (3) to the analysis of medicinal agents and their metabolites found in biological systems.\r\n               In modern practice of pharmacy it is important that pharmacists have more than an appreciation for quantitative analytical methodology. They must have working knowledge if they are to advise medical practitioners on drug quality of a drug product is challenged by a physician, the pharmacist is responsible for initiating steps to determine if indeed the product is defective. This may be accomplished by (1) calling and advising the drug manufacturer of the problem involving the product, (2) analyzing the preparation in the prescription laboratory, borrowing needed equipment from a clinical laboratory if necessary, (3) sending a portion of the sample to a private laboratory for analysis, or (4) a combination of all these steps. In any case, however, it remains the responsibility of the pharmacist to solve problems relating to drug quality. Pharmacist who have reason to believe that a drug product is not a proper quality and appears to be defective, because of improper labeling, discoloration, the presence of cloudiness, crystal, or precipitates in products known to be solutions, or for any other reason, are urged by the Food and Drug Administration and by the nonprofit standards-setting organization, The United States Pharmacopeia, to participate in the Drug Defect Reporting Program by preparing a report, or by completing a form [FD Form 2519a (2/72)], and sending it to: The united States Pharmacopeia, 12601 Twin brook parkway, Rockville, Md. The following information is requested: (1) trade name, dosage form, and strength, (2) lot number(s), (3) date purchased (if known), (4) source of product (where purchased, if known), (5) name address of pharmacy (included ZIP code, (8) telephone number (include area code), and (9) defects noted and suspected. This program alerts manufacturers to defective drug products and thereby ensures better quality in pharmaceutical products for the patient.",
+                "body": "Quantitative Pharmaceutical Chemistry may be define as the application of the procedures analytical chemistry (1) to the analysis and determination of the purity and quality of drugs and chemicals used in pharmacy, especially those official in the United States pharmacopeia and the National Formulary (2) to the analysis of the chemical constituents found in the human body whose altered concentrations during disease  states serve as diagnostic aids in the practice of medicine, and (3) to the analysis of medicinal agents and their metabolites found in biological systems.",
+                "caption": "",
+                "lesson": 6,
+                "body_type": 1
+              },
+              {
+                "id": 109,
+                "sequence": 2,
+                "body": "In modern practice of pharmacy it is important that pharmacists have more than an appreciation for quantitative analytical methodology. They must have working knowledge if they are to advise medical practitioners on drug quality of a drug product is challenged by a physician, the pharmacist is responsible for initiating steps to determine if indeed the product is defective. This may be accomplished by (1) calling and advising the drug manufacturer of the problem involving the product, (2) analyzing the preparation in the prescription laboratory, borrowing needed equipment from a clinical laboratory if necessary, (3) sending a portion of the sample to a private laboratory for analysis, or (4) a combination of all these steps. In any case, however, it remains the responsibility of the pharmacist to solve problems relating to drug quality. Pharmacist who have reason to believe that a drug product is not a proper quality and appears to be defective, because of improper labeling, discoloration, the presence of cloudiness, crystal, or precipitates in products known to be solutions, or for any other reason, are urged by the Food and Drug Administration and by the nonprofit standards-setting organization, The United States Pharmacopeia, to participate in the Drug Defect Reporting Program by preparing a report, or by completing a form [FD Form 2519a (2/72)], and sending it to: The united States Pharmacopeia, 12601 Twin brook parkway, Rockville, Md. The following information is requested: (1) trade name, dosage form, and strength, (2) lot number(s), (3) date purchased (if known), (4) source of product (where purchased, if known), (5) name address of pharmacy (included ZIP code, (8) telephone number (include area code), and (9) defects noted and suspected. This program alerts manufacturers to defective drug products and thereby ensures better quality in pharmaceutical products for the patient.",
                 "caption": "",
                 "lesson": 6,
                 "body_type": 1
@@ -86,11 +31,165 @@
             "topic": 6
           }
         ],
-        "questions": [],
+        "questions": [
+          {
+            "id": 7,
+            "choices": [
+              {
+                "id": 8,
+                "body": "True",
+                "question": 7,
+                "choice_type": 1
+              },
+              {
+                "id": 9,
+                "body": "False",
+                "question": 7,
+                "choice_type": 1
+              },
+              {
+                "id": 10,
+                "body": "None of the above",
+                "question": 7,
+                "choice_type": 1
+              }
+            ],
+            "question": "Quality control guarantees within reasonable limits that a drug product is free of impurities, is physically and chemically stable, contains the amount of active ingredient(s) as stated on the label, and provides optimal release of active ingredient(s) when the product is administered.",
+            "answer": "True",
+            "topic": 6,
+            "question_type": 1
+          },
+          {
+            "id": 8,
+            "choices": [
+              {
+                "id": 11,
+                "body": "Quantitative Pharmaceutical Chemistry",
+                "question": 8,
+                "choice_type": 1
+              },
+              {
+                "id": 12,
+                "body": "Drug Tests",
+                "question": 8,
+                "choice_type": 1
+              },
+              {
+                "id": 13,
+                "body": "Pharmaceutical Drug",
+                "question": 8,
+                "choice_type": 1
+              },
+              {
+                "id": 14,
+                "body": "Drugs pharmacy",
+                "question": 8,
+                "choice_type": 1
+              }
+            ],
+            "question": "Define as the application of the procedures analytical chemistry to the analysis and determination of the purity and quality of drugs and chemicals used in pharmacy.",
+            "answer": "Quantitative Pharmaceutical Chemistry",
+            "topic": 6,
+            "question_type": 1
+          },
+          {
+            "id": 9,
+            "choices": [
+              {
+                "id": 15,
+                "body": "Antibiotic",
+                "question": 9,
+                "choice_type": 1
+              },
+              {
+                "id": 16,
+                "body": "Quality",
+                "question": 9,
+                "choice_type": 1
+              },
+              {
+                "id": 17,
+                "body": "Medicines",
+                "question": 9,
+                "choice_type": 1
+              },
+              {
+                "id": 18,
+                "body": "Drugs",
+                "question": 9,
+                "choice_type": 1
+              }
+            ],
+            "question": "A drug product has been defined as the sum of all factors which contribute directly or indirectly to the safety, effectiveness, and reliability of the product.",
+            "answer": "Quality",
+            "topic": 6,
+            "question_type": 1
+          },
+          {
+            "id": 10,
+            "choices": [
+              {
+                "id": 19,
+                "body": "United States Pharmacopeia Convention, inc.,",
+                "question": 10,
+                "choice_type": 1
+              },
+              {
+                "id": 20,
+                "body": "Federal government and industrys",
+                "question": 10,
+                "choice_type": 1
+              },
+              {
+                "id": 21,
+                "body": "American Pharmaceutical Association",
+                "question": 10,
+                "choice_type": 1
+              },
+              {
+                "id": 22,
+                "body": "Educational institutions",
+                "question": 10,
+                "choice_type": 1
+              }
+            ],
+            "question": "The federal level drug-quality requirements are set through an organization known as.",
+            "answer": "United States Pharmacopeia Convention, inc.,",
+            "topic": 6,
+            "question_type": 1
+          },
+          {
+            "id": 11,
+            "choices": [
+              {
+                "id": 23,
+                "body": "True",
+                "question": 11,
+                "choice_type": 1
+              },
+              {
+                "id": 24,
+                "body": "False",
+                "question": 11,
+                "choice_type": 1
+              },
+              {
+                "id": 25,
+                "body": "None of the above",
+                "question": 11,
+                "choice_type": 1
+              }
+            ],
+            "question": "The term “quality” as applied to a drug product has been defined as the sum of all factors which contribute directly or indirectly to the safety, effectiveness, and reliability of the product",
+            "answer": "True",
+            "topic": 6,
+            "question_type": 1
+          }
+        ],
         "sequence": 2,
         "title": "Introduction to Pharmaceutical Analysis",
         "description": "--",
-        "objective": "Define the function of Quality Control in relation to drug analysis",
+        "objective": "The student aims to Define the function of Quality Control in relation to drug analysis",
         "image": "",
         "term": 1
       },
@@ -217,7 +316,31 @@
               {
                 "id": 8,
                 "sequence": 1,
-                "body": "Methods of analysis in quantitative pharmaceutical chemistry may be appropriately subdivided according to the following procedures, each of which requires a special technique.\r\n Volumetric analysis is the determination of the volume of a solution of known concentration required to react with a given amount of the substance to be analyzed.\r\nPhysicochemical methods of analysis are based on some specific physical or chemical property or properties of the substance being analyzed. In many assays the measurement of these properties requires the utilization of an instrumental technique. Physicochemical methods which commonly employ instrumental techniques as applied in quantitative pharmaceutical chemistry are chromatographic, spectrophotometric, electrometric, thermal conductimetric, refractometric, and polaritmetric. They constitute some of the most valuable methods used in analytical procedures. Since each of them requires special treatment, they will be discussed separately.\r\nGravimetric Analysis is the separation by extraction, precipitation, or other means of the constituents to be determined either in the natural state or in the form of a definite compound the composition of which is known to the analyst, and the weighing of the resulting product.\r\nSpecial methods are those which require a distinct type of technique, such as alkaloidal assaying.\r\nOfficial assays methods serve as an exact measure of the purity of a substance only when the results are considered in conjunction with the qualitative tests.\r\nThus, in the assay of zinc oxide, the determination of the purity of the oxide by assay must follow quantitative test for other metals which is present would be estimated as zinc oxide. A complete analysis therefore requires the qualitative estimation.\r\nThe theoretical considerations applicable in any given analysis are inherently part of the analytical procedure. They should be mastered before a determination is made, and they should be carefully applied throughout each step of the procedure.",
+                "body": "Methods of analysis in quantitative pharmaceutical chemistry may be appropriately subdivided according to the following procedures, each of which requires a special technique. Volumetric analysis is the determination of the volume of a solution of known concentration required to react with a given amount of the substance to be analyzed.",
+                "caption": "",
+                "lesson": 28,
+                "body_type": 1
+              },
+              {
+                "id": 110,
+                "sequence": 2,
+                "body": "Physicochemical methods of analysis are based on some specific physical or chemical property or properties of the substance being analyzed. In many assays the measurement of these properties requires the utilization of an instrumental technique. Physicochemical methods which commonly employ instrumental techniques as applied in quantitative pharmaceutical chemistry are chromatographic, spectrophotometric, electrometric, thermal conductimetric, refractometric, and polaritmetric. They constitute some of the most valuable methods used in analytical procedures. Since each of them requires special treatment, they will be discussed separately.",
+                "caption": "",
+                "lesson": 28,
+                "body_type": 1
+              },
+              {
+                "id": 111,
+                "sequence": 3,
+                "body": "Gravimetric Analysis is the separation by extraction, precipitation, or other means of the constituents to be determined either in the natural state or in the form of a definite compound the composition of which is known to the analyst, and the weighing of the resulting product.\r\nSpecial methods are those which require a distinct type of technique, such as alkaloidal assaying.\r\nOfficial assays methods serve as an exact measure of the purity of a substance only when the results are considered in conjunction with the qualitative tests.",
+                "caption": "",
+                "lesson": 28,
+                "body_type": 1
+              },
+              {
+                "id": 112,
+                "sequence": 4,
+                "body": "Thus, in the assay of zinc oxide, the determination of the purity of the oxide by assay must follow quantitative test for other metals which is present would be estimated as zinc oxide. A complete analysis therefore requires the qualitative estimation.\r\nThe theoretical considerations applicable in any given analysis are inherently part of the analytical procedure. They should be mastered before a determination is made, and they should be carefully applied throughout each step of the procedure.",
                 "caption": "",
                 "lesson": 28,
                 "body_type": 1
@@ -229,11 +352,177 @@
             "topic": 7
           }
         ],
-        "questions": [],
+        "questions": [
+          {
+            "id": 12,
+            "choices": [
+              {
+                "id": 26,
+                "body": "Volumetric analysis",
+                "question": 12,
+                "choice_type": 1
+              },
+              {
+                "id": 27,
+                "body": "Qualitative tests",
+                "question": 12,
+                "choice_type": 1
+              },
+              {
+                "id": 28,
+                "body": "Gravimetric analysis",
+                "question": 12,
+                "choice_type": 1
+              },
+              {
+                "id": 29,
+                "body": "Weak bases",
+                "question": 12,
+                "choice_type": 1
+              }
+            ],
+            "question": "Determination of the volume of a solution of known concentration required to react with a given amount of the substance to be analyzed.",
+            "answer": "Volumetric analysis",
+            "topic": 7,
+            "question_type": 1
+          },
+          {
+            "id": 13,
+            "choices": [
+              {
+                "id": 30,
+                "body": "Acetic",
+                "question": 13,
+                "choice_type": 1
+              },
+              {
+                "id": 31,
+                "body": "Zinc oxide",
+                "question": 13,
+                "choice_type": 1
+              },
+              {
+                "id": 32,
+                "body": "Electrometric",
+                "question": 13,
+                "choice_type": 1
+              },
+              {
+                "id": 33,
+                "body": "Arylamine",
+                "question": 13,
+                "choice_type": 1
+              }
+            ],
+            "question": "Physicochemical methods which commonly employ instrumental techniques as applied in quantitative pharmaceutical chemistry are chromatographic, spectrophotometric, _______, thermal conductimetric, refractometric, and polaritmetric.",
+            "answer": "Electrometric",
+            "topic": 7,
+            "question_type": 1
+          },
+          {
+            "id": 14,
+            "choices": [
+              {
+                "id": 34,
+                "body": "Physicochemical methods of analysis",
+                "question": 14,
+                "choice_type": 1
+              },
+              {
+                "id": 35,
+                "body": "Polaritmetric methods of analysis",
+                "question": 14,
+                "choice_type": 1
+              },
+              {
+                "id": 36,
+                "body": "Alkaloidal methods of analysis",
+                "question": 14,
+                "choice_type": 1
+              },
+              {
+                "id": 37,
+                "body": "Chlorpromazine methods of analysis",
+                "question": 14,
+                "choice_type": 1
+              }
+            ],
+            "question": "Based on some specific physical or chemical property or properties of the substance being analyzed.",
+            "answer": "Physicochemical methods of analysis",
+            "topic": 7,
+            "question_type": 1
+          },
+          {
+            "id": 15,
+            "choices": [
+              {
+                "id": 38,
+                "body": "Volumetric analysis",
+                "question": 15,
+                "choice_type": 1
+              },
+              {
+                "id": 39,
+                "body": "Qualitative tests",
+                "question": 15,
+                "choice_type": 1
+              },
+              {
+                "id": 40,
+                "body": "Gravimetric analysis",
+                "question": 15,
+                "choice_type": 1
+              },
+              {
+                "id": 41,
+                "body": "Weak bases",
+                "question": 15,
+                "choice_type": 1
+              }
+            ],
+            "question": "The separation by extraction, precipitation, or other means of the constituents to be determined either in the natural state or in the form of a definite compound the composition of which is known to the analyst, and the weighing of the resulting product.",
+            "answer": "Gravimetric analysis",
+            "topic": 7,
+            "question_type": 1
+          },
+          {
+            "id": 16,
+            "choices": [
+              {
+                "id": 42,
+                "body": "Monoprotic assaying",
+                "question": 16,
+                "choice_type": 1
+              },
+              {
+                "id": 43,
+                "body": "Atropine assaying",
+                "question": 16,
+                "choice_type": 1
+              },
+              {
+                "id": 44,
+                "body": "Alkaloidal assaying",
+                "question": 16,
+                "choice_type": 1
+              },
+              {
+                "id": 45,
+                "body": "Procaine assaying",
+                "question": 16,
+                "choice_type": 1
+              }
+            ],
+            "question": "Special methods are those which require a distinct type of technique, such as ____________.",
+            "answer": "Alkaloidal assaying",
+            "topic": 7,
+            "question_type": 1
+          }
+        ],
         "sequence": 3,
         "title": "Official Methods in Pharmaceutical Analysis",
         "description": "--",
-        "objective": "Demonstrate the different divisions of Volumetric Analysis",
+        "objective": "The student aims to Demonstrate the different divisions of Volumetric Analysis",
         "image": "",
         "term": 1
       },
@@ -322,11 +611,177 @@
             "topic": 8
           }
         ],
-        "questions": [],
+        "questions": [
+          {
+            "id": 17,
+            "choices": [
+              {
+                "id": 46,
+                "body": "Analyte contituents",
+                "question": 17,
+                "choice_type": 1
+              },
+              {
+                "id": 47,
+                "body": "Titrimetric methods",
+                "question": 17,
+                "choice_type": 1
+              },
+              {
+                "id": 48,
+                "body": "Stoichiometric point",
+                "question": 17,
+                "choice_type": 1
+              },
+              {
+                "id": 49,
+                "body": "Analytical methods",
+                "question": 17,
+                "choice_type": 1
+              }
+            ],
+            "question": "Defined as those analytical methods in which the volume of a solution of known concentration consumed during an analysis is taken as a measure of the amount of active constituent in a sample being analyzed.",
+            "answer": "Titrimetric methods",
+            "topic": 8,
+            "question_type": 1
+          },
+          {
+            "id": 18,
+            "choices": [
+              {
+                "id": 50,
+                "body": "Gram-equivalent",
+                "question": 18,
+                "choice_type": 1
+              },
+              {
+                "id": 51,
+                "body": "Molarity",
+                "question": 18,
+                "choice_type": 1
+              },
+              {
+                "id": 52,
+                "body": "Normality",
+                "question": 18,
+                "choice_type": 1
+              },
+              {
+                "id": 53,
+                "body": "Milliequivalent",
+                "question": 18,
+                "choice_type": 1
+              }
+            ],
+            "question": "Used more frequently and is defined as the number of gram-milliequivalents involved in a quantitative procedure.",
+            "answer": "Milliequivalent",
+            "topic": 8,
+            "question_type": 1
+          },
+          {
+            "id": 19,
+            "choices": [
+              {
+                "id": 54,
+                "body": "Normality",
+                "question": 19,
+                "choice_type": 1
+              },
+              {
+                "id": 55,
+                "body": "Molarity",
+                "question": 19,
+                "choice_type": 1
+              },
+              {
+                "id": 56,
+                "body": "Analyte",
+                "question": 19,
+                "choice_type": 1
+              },
+              {
+                "id": 57,
+                "body": "Titrant",
+                "question": 19,
+                "choice_type": 1
+              }
+            ],
+            "question": "Is a concentration expression and is defined as the number of equivalents of solute per liter (equiv/liter) or milliequivalents per milliliter (meq/ml) of solution.",
+            "answer": "Normality",
+            "topic": 8,
+            "question_type": 1
+          },
+          {
+            "id": 20,
+            "choices": [
+              {
+                "id": 58,
+                "body": "Equivalent",
+                "question": 20,
+                "choice_type": 1
+              },
+              {
+                "id": 59,
+                "body": "Gram-milliequivalent weight",
+                "question": 20,
+                "choice_type": 1
+              },
+              {
+                "id": 60,
+                "body": "Milliliter",
+                "question": 20,
+                "choice_type": 1
+              },
+              {
+                "id": 61,
+                "body": "Gram-equivalent weight",
+                "question": 20,
+                "choice_type": 1
+              }
+            ],
+            "question": "Defined as that weight in grams which is chemically equivalent to 1 gram-atom of hydrogen (1.0079 g).",
+            "answer": "Gram-equivalent weight",
+            "topic": 8,
+            "question_type": 1
+          },
+          {
+            "id": 21,
+            "choices": [
+              {
+                "id": 62,
+                "body": "Active",
+                "question": 21,
+                "choice_type": 1
+              },
+              {
+                "id": 63,
+                "body": "Molarity",
+                "question": 21,
+                "choice_type": 1
+              },
+              {
+                "id": 64,
+                "body": "Titrant",
+                "question": 21,
+                "choice_type": 1
+              },
+              {
+                "id": 65,
+                "body": "Normality",
+                "question": 21,
+                "choice_type": 1
+              }
+            ],
+            "question": "Is an expression of the concentration of a solution in terms of moles per liter",
+            "answer": "Molarity",
+            "topic": 8,
+            "question_type": 1
+          }
+        ],
         "sequence": 4,
         "title": "A. Volumetric Method: Neutralization",
         "description": "--",
-        "objective": "Explain the principles of Neutralization",
+        "objective": "The student can Explain the principles of Neutralization",
         "image": "",
         "term": 1
       },
@@ -492,7 +947,7 @@
         "sequence": 6,
         "title": "Divisions of Neutralization Titration",
         "description": "--",
-        "objective": "Official Drugs Assayed using Neutralization titration",
+        "objective": "The student aims to describe Official Drugs Assayed using Neutralization titration",
         "image": "",
         "term": 1
       }
@@ -618,8 +1073,8 @@
         "questions": [],
         "sequence": 1,
         "title": "Precipitation Titration",
-        "description": "Explain the Principle of Precipitation Titration",
-        "objective": "Identify the Different methods applied in Precipitation Titration",
+        "description": "--",
+        "objective": "The student can Identify the Different methods applied in Precipitation Titration; Explain the Principle of Precipitation Titration",
         "image": "",
         "term": 2
       },
@@ -793,7 +1248,7 @@
         "sequence": 2,
         "title": "Complex Formation Titrations",
         "description": "--",
-        "objective": "Explain the Principles  of Complex Formation Titration",
+        "objective": "The Student aims to Explain the Principles  of Complex Formation Titration",
         "image": "",
         "term": 2
       },
@@ -1009,7 +1464,7 @@
         "sequence": 3,
         "title": "Redox Titrations",
         "description": "----",
-        "objective": "Explain the principles of Redox Titrations",
+        "objective": "The Student aims to Explain the principles of Redox Titrations",
         "image": "",
         "term": 2
       }
@@ -1172,7 +1627,7 @@
         "sequence": 1,
         "title": "Special Methods Used in Pharmaceutical Analysis",
         "description": "------",
-        "objective": "Identify the special methods used in Pharmaceutical Analysis",
+        "objective": "The Student aims to Identify the special methods used in Pharmaceutical Analysis",
         "image": "",
         "term": 3
       }

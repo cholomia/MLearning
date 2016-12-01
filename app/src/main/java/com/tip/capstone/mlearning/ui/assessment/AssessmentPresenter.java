@@ -55,8 +55,8 @@ class AssessmentPresenter extends MvpNullObjectBasePresenter<AssessmentView> {
         return i + (int) (Math.random() * (size - i));
     }
 
-    int getAverage(int score, int items) {
-        return ((score / items) * 50) + 50;
+    double getAverage(int score, int items) {
+        return (((double) score / (double) items) * 50.0) + 50.0;
     }
 
 }

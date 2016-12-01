@@ -1,5 +1,7 @@
 package com.tip.capstone.mlearning.ui.quiz;
 
+import android.util.Log;
+
 import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 import com.tip.capstone.mlearning.model.Choice;
 import com.tip.capstone.mlearning.model.Question;
@@ -13,6 +15,8 @@ import io.realm.RealmList;
  * @since 21/11/2016
  */
 public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
+
+    private static final String TAG = QuizPresenter.class.getSimpleName();
 
     /**
      * Fisher-Yates Shuffle Algorithm for both the questions and the choices for each question.
@@ -59,7 +63,15 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
      * @param items total number of items
      * @return return average using score/items * 50 + 50
      */
-    int getAverage(int score, int items) {
-        return ((score / items) * 50) + 50;
+    double getAverage(int score, int items) {
+        double ave = (((double) score / (double) items) * 50.0) + 50.0;
+        double a = score / items;
+        Log.d(TAG, "getAverage: a:" + a);
+        double b = a * 50;
+        Log.d(TAG, "getAverage: b:" + b);
+        double c = b + 50;
+        Log.d(TAG, "getAverage: c:" + c);
+        Log.d(TAG, "getAverage: s:" + score + ", i:" + items + ", a:" + ave);
+        return ave;
     }
 }
