@@ -37,7 +37,8 @@
         <activity
             android:name=".ui.simulation.SimulationActivity"
             android:label="@string/title_activity_simulation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.glossary.GlossaryActivity"></activity>
     </application>
 
 </manifest>

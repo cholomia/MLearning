@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "word": "sample",
+        "description": "description"
+    },
+    {
+        "id": 2,
+        "word": "another sample",
+        "description": "another description"
+    }
+]

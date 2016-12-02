@@ -7,6 +7,7 @@ import com.tip.capstone.mlearning.helper.StringHelper;
 import com.tip.capstone.mlearning.model.Assessment;
 import com.tip.capstone.mlearning.model.AssessmentChoice;
 import com.tip.capstone.mlearning.model.Choice;
+import com.tip.capstone.mlearning.model.Glossary;
 import com.tip.capstone.mlearning.model.Lesson;
 import com.tip.capstone.mlearning.model.LessonDetail;
 import com.tip.capstone.mlearning.model.Question;
@@ -51,9 +52,12 @@ public class App extends Application {
                 realm.delete(Assessment.class);
                 realm.delete(AssessmentChoice.class);
 
+                realm.delete(Glossary.class);
+
                 // add data from raw files
                 realm.createAllFromJson(Term.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.study));
                 realm.createAllFromJson(Assessment.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.assessment));
+                realm.createAllFromJson(Glossary.class, StringHelper.readRawTextFile(getApplicationContext(), R.raw.glossary));
 
             }
         }, new Realm.Transaction.OnSuccess() {

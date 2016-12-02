@@ -9,6 +9,7 @@ import com.hannesdorfmann.mosby.mvp.MvpActivity;
 import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.databinding.ActivityMainBinding;
 import com.tip.capstone.mlearning.ui.assessment.AssessmentActivity;
+import com.tip.capstone.mlearning.ui.glossary.GlossaryActivity;
 import com.tip.capstone.mlearning.ui.grades.GradesActivity;
 import com.tip.capstone.mlearning.ui.simulation.SimulationActivity;
 import com.tip.capstone.mlearning.ui.term.TermActivity;
@@ -56,6 +57,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void onGlossaryClicked() {
-
+        startActivity(new Intent(this, GlossaryActivity.class));
     }
 }
