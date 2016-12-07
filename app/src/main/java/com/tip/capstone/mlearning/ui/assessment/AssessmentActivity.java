@@ -179,7 +179,7 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
                     .setNegativeButton("CANCEL", null)
                     .show();
         } else {
-            userAnswerList.remove(((AssessmentViewState) getViewState()).getCounter());
+            userAnswerList.remove(((AssessmentViewState) getViewState()).getCounter() - 1);
             ((AssessmentViewState) getViewState()).setUserAnswerList(userAnswerList);
 
             ((AssessmentViewState) getViewState()).decrementCounter();

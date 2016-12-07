@@ -21,6 +21,7 @@ import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityQuizBinding;
 import com.tip.capstone.mlearning.databinding.DialogQuizSummaryBinding;
 import com.tip.capstone.mlearning.model.Choice;
+import com.tip.capstone.mlearning.model.PreQuizGrade;
 import com.tip.capstone.mlearning.model.Question;
 import com.tip.capstone.mlearning.model.QuizGrade;
 import com.tip.capstone.mlearning.model.Topic;
@@ -46,6 +47,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     private List<Question> questionList;
     private List<UserAnswer> userAnswerList;
     private ChoiceListAdapter choiceAdapter;
+    private boolean preQuiz;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -65,6 +67,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
             Toast.makeText(getApplicationContext(), "No Topic Data Found", Toast.LENGTH_SHORT).show();
             finish();
         }
+        preQuiz = getIntent().getBooleanExtra(Constant.PRE_QUIZ, false);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz);
         // assumes theme has toolbar
@@ -98,6 +101,22 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     }
 
     @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        QuizActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .show();
+    }
+
+    @Override
     protected void onDestroy() {
         realm.close();
         Log.d(TAG, "onDestroy: realm is closed");
@@ -120,6 +139,18 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     @Override
     public void onNewViewStateInstance() {
         // alert user that quiz already taken
+        if (topic.getQuestions().size() <= 0) {
+            new AlertDialog.Builder(this)
+                    .setTitle("No Questions")
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            QuizActivity.this.finish();
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+        }
         QuizGrade quizGrade = realm.where(QuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
         if (quizGrade != null) {
             // already taken the quiz
@@ -190,7 +221,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
                     .setNegativeButton("CANCEL", null)
                     .show();
         } else {
-            userAnswerList.remove(((QuizViewState) getViewState()).getCounter());
+            userAnswerList.remove(((QuizViewState) getViewState()).getCounter() - 1);
             ((QuizViewState) getViewState()).setUserAnswerList(userAnswerList);
 
             ((QuizViewState) getViewState()).decrementCounter();
@@ -286,17 +317,29 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
         summaryListAdapter.setUserAnswerList(userAnswerList);
         dialogBinding.recyclerView.setAdapter(summaryListAdapter);
 
+        if (preQuiz) {
+            dialogBinding.recyclerView.setVisibility(View.GONE);
+        }
 
         final int finalScore = score;
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                QuizGrade quizGrade = new QuizGrade();
-                quizGrade.setId(topic.getId());
-                quizGrade.setRawScore(finalScore);
-                quizGrade.setItemCount(items);
-                quizGrade.setDateUpdated(new Date().getTime());
-                realm.copyToRealmOrUpdate(quizGrade);
+                if (preQuiz) {
+                    PreQuizGrade preQuizGrade = new PreQuizGrade();
+                    preQuizGrade.setId(topic.getId());
+                    preQuizGrade.setRawScore(finalScore);
+                    preQuizGrade.setItemCount(items);
+                    preQuizGrade.setDateUpdated(new Date().getTime());
+                    realm.copyToRealmOrUpdate(preQuizGrade);
+                } else {
+                    QuizGrade quizGrade = new QuizGrade();
+                    quizGrade.setId(topic.getId());
+                    quizGrade.setRawScore(finalScore);
+                    quizGrade.setItemCount(items);
+                    quizGrade.setDateUpdated(new Date().getTime());
+                    realm.copyToRealmOrUpdate(quizGrade);
+                }
             }
         });
 

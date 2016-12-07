@@ -18,4 +18,5 @@ public class Constant {
     public static final String RES_ID = "res_id";
     public static final String RAW_NAME_WITHOUT_EXT = "raw_name_without_extension";
     public static final String VIDEO_TITLE = "video_title";
+    public static final String PRE_QUIZ = "pre_quiz";
 }

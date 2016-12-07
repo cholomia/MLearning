@@ -22,7 +22,7 @@ import java.util.List;
  * @since 21/11/2016
  */
 
-class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.ViewHolder> {
+public class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.ViewHolder> {
 
     private final List<Choice> choiceList;
     private boolean[] selected;
@@ -31,7 +31,7 @@ class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.ViewHolde
     /**
      * Default Constructor
      */
-    ChoiceListAdapter() {
+    public ChoiceListAdapter() {
         choiceList = new ArrayList<>();
     }
 
@@ -73,7 +73,7 @@ class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.ViewHolde
      *
      * @param choiceList list to display
      */
-    void setChoiceList(List<Choice> choiceList) {
+    public void setChoiceList(List<Choice> choiceList) {
         this.choiceList.clear();
         this.choiceList.addAll(choiceList);
         resetSelected(-1);
@@ -96,7 +96,7 @@ class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.ViewHolde
     /**
      * @return selected choice
      */
-    Choice getSelectedChoice() {
+    public Choice getSelectedChoice() {
         for (int i = 0; i < selected.length; i++) {
             if (selected[i]) {
                 return choiceList.get(i);

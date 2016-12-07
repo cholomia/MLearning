@@ -15,6 +15,7 @@ import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityGradesBinding;
 import com.tip.capstone.mlearning.model.AssessmentGrade;
 import com.tip.capstone.mlearning.model.Grades;
+import com.tip.capstone.mlearning.model.PreQuizGrade;
 import com.tip.capstone.mlearning.model.QuizGrade;
 import com.tip.capstone.mlearning.model.Term;
 import com.tip.capstone.mlearning.model.Topic;
@@ -70,11 +71,32 @@ public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> imp
             gradesList.add(headerTerm);
 
             for (Topic topic : term.getTopics().sort(Topic.COL_SEQ)) {
+                // topic header
+                Grades topicHeader = new Grades();
+                topicHeader.setHeader(true);
+                topicHeader.setTitle(topic.getTitle());
+                topicHeader.setSequence(gradesList.size() + 1);
+                gradesList.add(topicHeader);
 
                 Grades nonHeader = new Grades();
-                nonHeader.setHeader(false);
-                nonHeader.setTitle(topic.getTitle());
 
+                nonHeader.setHeader(false);
+                nonHeader.setTitle("Pre Quiz");
+                PreQuizGrade preQuizGrade = realm.where(PreQuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
+                if (preQuizGrade != null) {
+                    QuizGrade preGrade = new QuizGrade();
+                    preGrade.setRawScore(preQuizGrade.getRawScore());
+                    preGrade.setItemCount(preQuizGrade.getItemCount());
+                    nonHeader.setQuizGrade(preGrade);
+                } else {
+                    nonHeader.setQuizGrade(null);
+                }
+                nonHeader.setSequence(gradesList.size() + 1);
+                gradesList.add(nonHeader);
+
+                nonHeader = new Grades();
+                nonHeader.setHeader(false);
+                nonHeader.setTitle("Post Quiz");
                 QuizGrade quizGrade = realm.where(QuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
 
                 if (quizGrade != null) {
@@ -82,6 +104,7 @@ public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> imp
                 } else {
                     nonHeader.setQuizGrade(null);
                 }
+
                 nonHeader.setSequence(gradesList.size() + 1);
                 gradesList.add(nonHeader);
             }
@@ -115,6 +138,7 @@ public class GradesActivity extends MvpActivity<GradesView, GradesPresenter> imp
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
+                        realm.delete(PreQuizGrade.class);
                         realm.delete(QuizGrade.class);
                         realm.delete(AssessmentGrade.class);
                     }

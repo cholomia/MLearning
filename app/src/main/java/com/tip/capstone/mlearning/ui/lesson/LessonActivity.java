@@ -19,6 +19,7 @@ import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityLessonBinding;
 import com.tip.capstone.mlearning.model.Lesson;
+import com.tip.capstone.mlearning.model.PreQuizGrade;
 import com.tip.capstone.mlearning.model.Topic;
 import com.tip.capstone.mlearning.ui.quiz.QuizActivity;
 
@@ -69,8 +70,43 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
         binding.container.setAdapter(lessonPageAdapter);
 
         setUiPageViewController();
-        showObjectives();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 07/12/2016 save instance to check if objective is already displayed
+        PreQuizGrade preQuizGrade = realm.where(PreQuizGrade.class).equalTo(Constant.ID, topic.getId()).findFirst();
+        if (preQuizGrade == null) {
+            showPreQuizPrompt();
+        } else {
+            showObjectives();
+        }
+    }
+
+    private void showPreQuizPrompt() {
+        new AlertDialog.Builder(this)
+                .setTitle(topic.getTitle())
+                .setMessage("You have to take the Pre-Assessment Quiz")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        Intent intent = new Intent(LessonActivity.this, QuizActivity.class);
+                        intent.putExtra(Constant.ID, topic.getId());
+                        intent.putExtra(Constant.PRE_QUIZ, true);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("BACK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                        LessonActivity.this.finish();
+                    }
+                })
+                .show();
     }
 
     /**
