@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,8 +24,10 @@ import com.tip.capstone.mlearning.databinding.DialogQuizSummaryBinding;
 import com.tip.capstone.mlearning.model.Assessment;
 import com.tip.capstone.mlearning.model.AssessmentChoice;
 import com.tip.capstone.mlearning.model.AssessmentGrade;
+import com.tip.capstone.mlearning.model.Letter;
 import com.tip.capstone.mlearning.model.UserAnswer;
 import com.tip.capstone.mlearning.ui.adapter.SummaryListAdapter;
+import com.tip.capstone.mlearning.ui.quiz.LetterListAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +50,8 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
     private RealmResults<Assessment> assessmentRealmResults;
     private List<UserAnswer> userAnswerList;
     private List<Assessment> assessmentList;
+    private LetterListAdapter adapterLetterAnswer;
+    private LetterListAdapter adapterLetterChoice;
 
     @SuppressWarnings("ConstantConditions") // assumes that the theme has toolbar
     @Override
@@ -71,6 +76,18 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
         // setup adapter
         choiceAdapter = new AssessmentChoiceListAdapter(this);
         binding.recyclerView.setAdapter(choiceAdapter);
+
+        // recyclerview for identification answer
+        adapterLetterAnswer = new LetterListAdapter(getMvpView(), false);
+        binding.recyclerViewAnswer.setLayoutManager(new GridLayoutManager(this, 10));
+        binding.recyclerViewAnswer.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerViewAnswer.setAdapter(adapterLetterAnswer);
+        // recyclerview for identification letter choices
+        adapterLetterChoice = new LetterListAdapter(getMvpView(), true);
+        binding.recyclerViewLetterChoices.setLayoutManager(new GridLayoutManager(this, 10));
+        binding.recyclerViewLetterChoices.setItemAnimator(new DefaultItemAnimator());
+        binding.recyclerViewLetterChoices.setAdapter(adapterLetterChoice);
+
         // setup bind data
         String strNumItems = "Number of Items: " + assessmentRealmResults.size();
         binding.txtNumItems.setText(strNumItems);
@@ -153,12 +170,15 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
                 .getCounter() + 1) + ".) " + assessment.getQuestion());
         if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_MULTIPLE) {
             binding.recyclerView.setVisibility(View.VISIBLE);
-            binding.etAnswer.setVisibility(View.GONE);
+            binding.recyclerViewAnswer.setVisibility(View.GONE);
+            binding.recyclerViewLetterChoices.setVisibility(View.GONE);
             choiceAdapter.setChoiceList(assessment.getAssessmentchoices());
         } else if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
             binding.recyclerView.setVisibility(View.GONE);
-            binding.etAnswer.setText("");
-            binding.etAnswer.setVisibility(View.VISIBLE);
+            binding.recyclerViewAnswer.setVisibility(View.VISIBLE);
+            binding.recyclerViewLetterChoices.setVisibility(View.VISIBLE);
+            adapterLetterAnswer.setLetters(presenter.getAssessmentLetter(assessment.getAnswer()));
+            adapterLetterChoice.setLetters(presenter.getChoiceLetters(assessment.getAnswer()));
         }
     }
 
@@ -204,11 +224,11 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
                 return;
             }
         } else if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
-            if (binding.etAnswer.getText().toString().isEmpty()) {
+            if (adapterLetterAnswer.getAnswer().isEmpty()) {
                 Snackbar.make(binding.getRoot(), "Enter Answer", Snackbar.LENGTH_SHORT).show();
                 return;
             }
-            userAnswer.setUserAnswer(binding.etAnswer.getText().toString());
+            userAnswer.setUserAnswer(adapterLetterAnswer.getAnswer());
             userAnswer.setChoiceType(Constant.DETAIL_TYPE_IMAGE);
         }
         userAnswerList.add(userAnswer);
@@ -247,6 +267,19 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
         this.assessmentList = assessmentList;
         this.userAnswerList = userAnswerList;
         onSetQuestion(assessmentList.get(counter));
+    }
+
+    @Override
+    public void onLetterClicked(int position, boolean choice, Letter letter) {
+        String strLetter = letter.getLetter();
+        Log.d(TAG, "onLetterClicked: choice: " + choice + " ||letter: " + strLetter);
+        if (choice) {
+            adapterLetterChoice.removeLetter(position);
+            adapterLetterAnswer.addLetter(strLetter);
+        } else {
+            adapterLetterAnswer.removeLetter(position);
+            adapterLetterChoice.addLetter(strLetter);
+        }
     }
 
     /**

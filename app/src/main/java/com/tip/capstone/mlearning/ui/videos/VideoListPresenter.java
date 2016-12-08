@@ -14,9 +14,48 @@ import java.util.List;
 
 public class VideoListPresenter extends MvpNullObjectBasePresenter<VideoListView> {
 
-    private static final int[] VIDEO_RES_ID = {R.raw.sample_video};
-    private static final String[] VIDEO_NAME_WITHOUT_EXTENSION = {"sample_video"};
-    private static final String[] VIDEO_TITLE = {"This is a sample video"};
+    private static final int[] VIDEO_RES_ID = {
+            R.raw.acidimetric,
+            R.raw.alkalimetric_titration,
+            R.raw.aqueous_solution_1_m_nacl,
+            R.raw.gravimetric_analysis_of_an_unknown_chloride_salt,
+            R.raw.non_aqueous,
+            R.raw.titrimetric_volumetric,
+            R.raw.complexometric_titration,
+            R.raw.how_to_prepare_standard_edta_solution,
+            R.raw.iodemetric_titration,
+            R.raw.iodometric_titration_of_copper,
+            R.raw.precipitation_titration_mohr_method,
+            R.raw.redox_titration_lab
+    };
+    private static final String[] VIDEO_NAME_WITHOUT_EXTENSION = {
+            "acidimetric",
+            "alkalimetric_titration",
+            "aqueous_solution_1_m_nacl",
+            "gravimetric_analysis_of_an_unknown_chloride_salt",
+            "non_aqueous",
+            "titrimetric_volumetric",
+            "complexometric_titration",
+            "how_to_prepare_standard_edta_solution",
+            "iodemetric_titration",
+            "iodometric_titration_of_copper",
+            "precipitation_titration_mohr_method",
+            "redox_titration_lab"
+    };
+    private static final String[] VIDEO_TITLE = {
+            "Acidimetric",
+            "Alkalimetric Titration",
+            "Aqueous solution 1 M NaCl",
+            "Gravimetric Analysis of an Unknown Chloride Salt",
+            "Non Aqueous",
+            "Titrimetric Volumetric",
+            "Complexometric Titration",
+            "How to prepare standard EDTA solution",
+            "Iodemetric Titration",
+            "Iodometric Titration of Copper",
+            "Precipitation Titration - Mohr Method",
+            "Redox titration lab - permanganate and iron (II) under acidic conditions"
+    };
 
     public void loadVideoList() {
         List<Video> videoList = new ArrayList<>();

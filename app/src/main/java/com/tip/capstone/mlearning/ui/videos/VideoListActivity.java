@@ -37,7 +37,7 @@ public class VideoListActivity extends MvpViewStateActivity<VideoListView, Video
         adapter = new VideoListAdapter(getMvpView());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        //binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         binding.recyclerView.setAdapter(adapter);
 
         presenter.loadVideoList();

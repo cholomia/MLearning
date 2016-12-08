@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityQuizBinding;
 import com.tip.capstone.mlearning.databinding.DialogQuizSummaryBinding;
 import com.tip.capstone.mlearning.model.Choice;
+import com.tip.capstone.mlearning.model.Letter;
 import com.tip.capstone.mlearning.model.PreQuizGrade;
 import com.tip.capstone.mlearning.model.Question;
 import com.tip.capstone.mlearning.model.QuizGrade;
@@ -48,6 +50,8 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
     private List<UserAnswer> userAnswerList;
     private ChoiceListAdapter choiceAdapter;
     private boolean preQuiz;
+    private LetterListAdapter adapterLetterAnswer;
+    private LetterListAdapter adapterLetterChoice;
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -81,6 +85,7 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
         // setup adapter
         choiceAdapter = new ChoiceListAdapter();
         binding.recyclerView.setAdapter(choiceAdapter);
+
         // setup additional data on layout using DataBinding
         binding.setView(getMvpView());
         String strNumItems = "Number of Items: " + topic.getQuestions().size();
@@ -289,6 +294,11 @@ public class QuizActivity extends MvpViewStateActivity<QuizView, QuizPresenter> 
         this.userAnswerList = userAnswerList;
         if (questionList.size() > 0)
             onSetQuestion(questionList.get(counter));
+    }
+
+    @Override
+    public void onLetterClicked(int position, boolean choice, Letter letter) {
+
     }
 
     /**

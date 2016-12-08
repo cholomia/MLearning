@@ -1,6 +1,7 @@
 package com.tip.capstone.mlearning.ui.quiz;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
+import com.tip.capstone.mlearning.model.Letter;
 import com.tip.capstone.mlearning.model.Question;
 import com.tip.capstone.mlearning.model.UserAnswer;
 
@@ -33,4 +34,6 @@ public interface QuizView extends MvpView {
      * @param userAnswerList current user answers
      */
     void restoreData(int counter, List<Question> questionList, List<UserAnswer> userAnswerList);
+
+    void onLetterClicked(int position, boolean choice, Letter letter);
 }

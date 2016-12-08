@@ -16,6 +16,8 @@
         android:id="@+id/card_item_video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         android:foreground="?attr/selectableItemBackground"
         android:onClick="@{() -> view.onVideoClicked(video)}"
         android:orientation="vertical"

@@ -2,6 +2,7 @@ package com.tip.capstone.mlearning.ui.assessment;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 import com.tip.capstone.mlearning.model.Assessment;
+import com.tip.capstone.mlearning.model.Letter;
 import com.tip.capstone.mlearning.model.UserAnswer;
 
 import java.util.List;
@@ -35,4 +36,6 @@ public interface AssessmentView extends MvpView {
      * @param userAnswerList the user answer list
      */
     void restoreData(int counter, List<Assessment> assessmentList, List<UserAnswer> userAnswerList);
+
+    void onLetterClicked(int position, boolean choice, Letter letter);
 }
