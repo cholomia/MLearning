@@ -3,8 +3,8 @@ package com.tip.capstone.mlearning.ui.assessment;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
@@ -26,13 +26,12 @@ import java.util.List;
 
 class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceListAdapter.ViewHolder> {
 
+    private static final String TAG = AssessmentChoiceListAdapter.class.getSimpleName();
     private final List<AssessmentChoice> choiceList;
     private boolean[] selected;
-    private final Context context;
     private boolean onBind;
 
-    AssessmentChoiceListAdapter(Context context) {
-        this.context = context;
+    AssessmentChoiceListAdapter() {
         choiceList = new ArrayList<>();
     }
 
@@ -55,8 +54,8 @@ class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceL
         x += position;
         holder.itemChoiceBinding.setLetter(x + "");
         if (choice.getChoice_type() == Constant.DETAIL_TYPE_IMAGE) {
-            Glide.with(context)
-                    .load(ImageHelper.getResourceId(context, choice.getBody()))
+            Glide.with(holder.itemView.getContext())
+                    .load(ImageHelper.getResourceId(holder.itemView.getContext(), choice.getBody()))
                     .into(holder.itemChoiceBinding.imgChoice);
         }
         onBind = true;
@@ -77,9 +76,8 @@ class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceL
     void setChoiceList(List<AssessmentChoice> choiceList) {
         this.choiceList.clear();
         this.choiceList.addAll(choiceList);
-        resetSelected(-1);
-        // TODO: 24/11/2016 notifydatasetchanged below might not be needed, see resetSelected()
         notifyDataSetChanged();
+        resetSelected(-1);
     }
 
     /**
@@ -88,6 +86,7 @@ class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceL
      * @param adapterPosition the position of choice checked
      */
     private void resetSelected(int adapterPosition) {
+        Log.d(TAG, "resetSelected: " + adapterPosition);
         selected = new boolean[choiceList.size()];
         for (int i = 0; i < choiceList.size(); i++) {
             selected[i] = i == adapterPosition;
@@ -99,12 +98,17 @@ class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceL
      * @return Selected Choice
      */
     AssessmentChoice getSelectedChoice() {
-        for (int i = 0; i < selected.length; i++) {
-            if (selected[i]) {
-                return choiceList.get(i);
-            }
-        }
+        for (int i = 0; i < selected.length; i++) if (selected[i]) return choiceList.get(i);
         return null;
+    }
+
+    public void setAnswer(String userAnswer) {
+        Log.d(TAG, "setAnswer: user: " + userAnswer);
+        for (int i = 0; i < choiceList.size(); i++)
+            if (choiceList.get(i).getBody().contentEquals(userAnswer)) {
+                Log.d(TAG, "setAnswer: " + i + ", " + choiceList.get(i).getBody());
+                resetSelected(i);
+            }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -117,13 +121,7 @@ class AssessmentChoiceListAdapter extends RecyclerView.Adapter<AssessmentChoiceL
             itemChoiceBinding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    resetSelected(getAdapterPosition());
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    resetSelected(getAdapterPosition());
+                    if (b) resetSelected(getAdapterPosition());
                 }
             });
         }

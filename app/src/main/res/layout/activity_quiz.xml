@@ -45,15 +45,20 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-            <!-- Visible if question type is IDENTIFICATION -->
-            <EditText
-                android:id="@+id/et_answer"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_answer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:background="@android:drawable/edit_text"
-                android:hint="@string/your_answer"
-                tools:ignore="LabelFor" />
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blue" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_letter_choices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <!-- Visible if question type is MULTIPLE CHOICE -->
             <android.support.v7.widget.RecyclerView

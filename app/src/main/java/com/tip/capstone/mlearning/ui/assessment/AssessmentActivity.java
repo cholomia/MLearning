@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -26,8 +25,8 @@ import com.tip.capstone.mlearning.model.AssessmentChoice;
 import com.tip.capstone.mlearning.model.AssessmentGrade;
 import com.tip.capstone.mlearning.model.Letter;
 import com.tip.capstone.mlearning.model.UserAnswer;
-import com.tip.capstone.mlearning.ui.adapter.SummaryListAdapter;
-import com.tip.capstone.mlearning.ui.quiz.LetterListAdapter;
+import com.tip.capstone.mlearning.ui.adapters.SummaryListAdapter;
+import com.tip.capstone.mlearning.ui.adapters.LetterListAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,14 +43,20 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
         implements AssessmentView {
 
     private static final String TAG = AssessmentActivity.class.getSimpleName();
+
     private Realm realm;
-    private ActivityAssessmentBinding binding;
-    private AssessmentChoiceListAdapter choiceAdapter;
     private RealmResults<Assessment> assessmentRealmResults;
+
+    private ActivityAssessmentBinding binding;
+
     private List<UserAnswer> userAnswerList;
     private List<Assessment> assessmentList;
+
+    private AssessmentChoiceListAdapter choiceAdapter;
+
     private LetterListAdapter adapterLetterAnswer;
     private LetterListAdapter adapterLetterChoice;
+    private List<List<Letter>> lettersList;
 
     @SuppressWarnings("ConstantConditions") // assumes that the theme has toolbar
     @Override
@@ -74,7 +79,7 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
         binding.recyclerView.setItemAnimator(new DefaultItemAnimator());
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         // setup adapter
-        choiceAdapter = new AssessmentChoiceListAdapter(this);
+        choiceAdapter = new AssessmentChoiceListAdapter();
         binding.recyclerView.setAdapter(choiceAdapter);
 
         // recyclerview for identification answer
@@ -103,6 +108,22 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("EXIT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AssessmentActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .show();
     }
 
     @Override
@@ -148,12 +169,15 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
                     .show();
         }
         // setup data
-        Log.d(TAG, "onNewViewStateInstance: applying algorithm to quiz realm results");
         ((AssessmentViewState) getViewState()).setCounter(0);
 
+        lettersList = new ArrayList<>();
         userAnswerList = new ArrayList<>();
         assessmentList = presenter.getShuffledAssessmentList(realm.copyFromRealm(assessmentRealmResults));
 
+        for (int i = 0; i < assessmentList.size(); i++) lettersList.add(new ArrayList<Letter>());
+
+        ((AssessmentViewState) getViewState()).setLetterList(lettersList);
         ((AssessmentViewState) getViewState()).setUserAnswerList(userAnswerList);
         ((AssessmentViewState) getViewState()).setAssessmentList(assessmentList);
 
@@ -166,19 +190,41 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
      * @param assessment the assessment question to display
      */
     private void onSetQuestion(Assessment assessment) {
-        binding.txtQuestion.setText((((AssessmentViewState) getViewState())
-                .getCounter() + 1) + ".) " + assessment.getQuestion());
+        int counter = ((AssessmentViewState) getViewState()).getCounter();
+        binding.txtQuestion.setText((counter + 1) + ".) " + assessment.getQuestion());
+        UserAnswer userAnswer = null;
+        if (userAnswerList.size() > counter)
+            userAnswer = userAnswerList.get(counter);
+        Log.d(TAG, "onSetQuestion: user answer: " + (userAnswer == null ? "null" : userAnswer.getUserAnswer()));
         if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_MULTIPLE) {
             binding.recyclerView.setVisibility(View.VISIBLE);
             binding.recyclerViewAnswer.setVisibility(View.GONE);
             binding.recyclerViewLetterChoices.setVisibility(View.GONE);
             choiceAdapter.setChoiceList(assessment.getAssessmentchoices());
+            if (userAnswer != null) choiceAdapter.setAnswer(userAnswer.getUserAnswer());
         } else if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
             binding.recyclerView.setVisibility(View.GONE);
             binding.recyclerViewAnswer.setVisibility(View.VISIBLE);
             binding.recyclerViewLetterChoices.setVisibility(View.VISIBLE);
             adapterLetterAnswer.setLetters(presenter.getAssessmentLetter(assessment.getAnswer()));
-            adapterLetterChoice.setLetters(presenter.getChoiceLetters(assessment.getAnswer()));
+
+            Log.d(TAG, "onSetQuestion: answer: " + assessment.getAnswer());
+
+            if (lettersList.get(counter).size() <= 0) {
+                lettersList.set(counter, presenter.getChoiceLetters(assessment.getAnswer()));
+                ((AssessmentViewState) getViewState()).setLetterList(lettersList);
+            }
+
+            adapterLetterChoice.setLetters(lettersList.get(counter));
+            Log.d(TAG, "onSetQuestion: choices: " + adapterLetterChoice.getAnswer());
+
+            if (userAnswer != null)
+                for (int i = 0; i < userAnswer.getUserAnswer().length(); i++) {
+                    String s = userAnswer.getUserAnswer().charAt(i) + "";
+                    int emptyIndex = adapterLetterAnswer.getEmptyIndex();
+                    if (emptyIndex != -1) adapterLetterAnswer.addLetter(s, emptyIndex);
+                }
+            Log.d(TAG, "onSetQuestion: ident answer: " + adapterLetterAnswer.getAnswer());
         }
     }
 
@@ -199,16 +245,13 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
                     .setNegativeButton("CANCEL", null)
                     .show();
         } else {
-            userAnswerList.remove(((AssessmentViewState) getViewState()).getCounter() - 1);
-            ((AssessmentViewState) getViewState()).setUserAnswerList(userAnswerList);
-
+            setUserAnswer(false);
             ((AssessmentViewState) getViewState()).decrementCounter();
             onSetQuestion(assessmentList.get(((AssessmentViewState) getViewState()).getCounter()));
         }
     }
 
-    @Override
-    public void onNext() {
+    private String setUserAnswer(boolean hasReturn) {
         Assessment assessment = assessmentList.get(((AssessmentViewState) getViewState()).getCounter());
         UserAnswer userAnswer = new UserAnswer();
         userAnswer.setQuestionId(assessment.getId());
@@ -216,23 +259,38 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
 
         if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_MULTIPLE) {
             AssessmentChoice choice = choiceAdapter.getSelectedChoice();
-            if (choice != null) {
-                userAnswer.setUserAnswer(choice.getBody());
-                userAnswer.setChoiceType(choice.getChoice_type());
-            } else {
-                Snackbar.make(binding.getRoot(), "Select Answer", Snackbar.LENGTH_SHORT).show();
-                return;
+            if (choice == null && hasReturn) {
+                return "Select Answer";
             }
+            userAnswer.setUserAnswer(choice != null ? choice.getBody() : "");
+            userAnswer.setChoiceType(choice != null ? choice.getChoice_type() : 0);
         } else if (assessment.getQuestion_type() == Constant.QUESTION_TYPE_IDENTIFICATION) {
-            if (adapterLetterAnswer.getAnswer().isEmpty()) {
-                Snackbar.make(binding.getRoot(), "Enter Answer", Snackbar.LENGTH_SHORT).show();
-                return;
+            if (hasReturn) {
+                if (adapterLetterAnswer.getAnswer().isEmpty()) {
+                    return "Enter Answer";
+                }
+                if (!adapterLetterAnswer.completeAnswer()) {
+                    return "Answer incomplete";
+                }
             }
             userAnswer.setUserAnswer(adapterLetterAnswer.getAnswer());
             userAnswer.setChoiceType(Constant.DETAIL_TYPE_IMAGE);
         }
-        userAnswerList.add(userAnswer);
+        if (userAnswerList.size() > ((AssessmentViewState) getViewState()).getCounter())
+            userAnswerList.set(((AssessmentViewState) getViewState()).getCounter(), userAnswer);
+        else
+            userAnswerList.add(userAnswer);
         ((AssessmentViewState) getViewState()).setUserAnswerList(userAnswerList);
+        return null;
+    }
+
+    @Override
+    public void onNext() {
+        String message = setUserAnswer(true);
+        if (message != null) {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (((AssessmentViewState) getViewState()).getCounter() < assessmentList.size() - 1) {
             ((AssessmentViewState) getViewState()).incrementCounter();
@@ -263,9 +321,10 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
     }
 
     @Override
-    public void restoreData(int counter, List<Assessment> assessmentList, List<UserAnswer> userAnswerList) {
+    public void restoreData(int counter, List<Assessment> assessmentList, List<UserAnswer> userAnswerList, List<List<Letter>> lettersList) {
         this.assessmentList = assessmentList;
         this.userAnswerList = userAnswerList;
+        this.lettersList = lettersList;
         onSetQuestion(assessmentList.get(counter));
     }
 
@@ -274,11 +333,17 @@ public class AssessmentActivity extends MvpViewStateActivity<AssessmentView, Ass
         String strLetter = letter.getLetter();
         Log.d(TAG, "onLetterClicked: choice: " + choice + " ||letter: " + strLetter);
         if (choice) {
-            adapterLetterChoice.removeLetter(position);
-            adapterLetterAnswer.addLetter(strLetter);
+            int emptyIndex = adapterLetterAnswer.getEmptyIndex();
+            if (emptyIndex != -1) {
+                adapterLetterChoice.removeLetter(position);
+                adapterLetterAnswer.addLetter(strLetter, emptyIndex);
+            }
         } else {
-            adapterLetterAnswer.removeLetter(position);
-            adapterLetterChoice.addLetter(strLetter);
+            int emptyIndex = adapterLetterChoice.getEmptyIndex();
+            if (emptyIndex != -1) {
+                adapterLetterAnswer.removeLetter(position);
+                adapterLetterChoice.addLetter(strLetter, emptyIndex);
+            }
         }
     }
 

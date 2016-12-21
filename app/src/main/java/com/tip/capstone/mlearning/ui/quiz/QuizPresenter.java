@@ -80,7 +80,7 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
     }
 
     public List<Letter> getChoiceLetters(String answer) {
-        answer = answer.trim();
+        answer = answer.replaceAll("\\s+", "");
         List<Letter> letters = new ArrayList<>();
         for (int i = 0; i < answer.length(); i++) {
             Letter letter = new Letter();
@@ -90,7 +90,7 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
             letter.setSpace(false);
             letters.add(letter);
         }
-        while (letters.size() > 10 && letters.size() % 10 != 0) {
+        while (letters.size() % 10 != 0) {
             Random r = new Random();
             char c = (char) (r.nextInt(26) + 'a');
             Letter letter = new Letter();
@@ -101,11 +101,19 @@ public class QuizPresenter extends MvpNullObjectBasePresenter<QuizView> {
             letters.add(letter);
         }
         Collections.shuffle(letters);
-        return null;
+        return letters;
     }
 
     public List<Letter> getAssessmentLetter(String answer) {
         List<Letter> letters = new ArrayList<>();
+        for (int i = 0; i < answer.length(); i++) {
+            Letter letter = new Letter();
+            letter.setLetter((answer.charAt(i) + "").contentEquals(" ") ? " " : "");
+            letter.setGenerated(false);
+            letter.setGiven(false);
+            letter.setSpace((answer.charAt(i) + "").contentEquals(" "));
+            letters.add(letter);
+        }
         return letters;
     }
 }

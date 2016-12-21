@@ -319,24 +319,6 @@
         "body": "Fajan’s method",
         "assessment": 12,
         "choice_type": 1
-      },
-      {
-        "id": 51,
-        "body": "Complex",
-        "assessment": 12,
-        "choice_type": 1
-      },
-      {
-        "id": 52,
-        "body": "Chelate",
-        "assessment": 12,
-        "choice_type": 1
-      },
-      {
-        "id": 53,
-        "body": "Coordination Center",
-        "assessment": 12,
-        "choice_type": 1
       }
     ],
     "question": "Three main procedures are widely used depending on the type of application EXCEPT:",
@@ -349,6 +331,24 @@
       {
         "id": 50,
         "body": "Complexation Reaction",
+        "assessment": 13,
+        "choice_type": 1
+      },
+      {
+        "id": 51,
+        "body": "Complex",
+        "assessment": 13,
+        "choice_type": 1
+      },
+      {
+        "id": 52,
+        "body": "Chelate",
+        "assessment": 13,
+        "choice_type": 1
+      },
+      {
+        "id": 53,
+        "body": "Coordination Center",
         "assessment": 13,
         "choice_type": 1
       }

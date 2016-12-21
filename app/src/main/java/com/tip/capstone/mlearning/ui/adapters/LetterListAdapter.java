@@ -1,4 +1,4 @@
-package com.tip.capstone.mlearning.ui.quiz;
+package com.tip.capstone.mlearning.ui.adapters;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.databinding.ItemLetterBinding;
 import com.tip.capstone.mlearning.model.Letter;
-import com.tip.capstone.mlearning.ui.assessment.AssessmentView;
+import com.tip.capstone.mlearning.ui.views.IdentificationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +23,11 @@ public class LetterListAdapter extends RecyclerView.Adapter<LetterListAdapter.Vi
 
     private static final String TAG = LetterListAdapter.class.getSimpleName();
     private List<Letter> letters;
-    private AssessmentView assessmentView;
+    private IdentificationView identificationView;
     private boolean choice;
 
-    public LetterListAdapter(AssessmentView assessmentView, boolean choice) {
-        this.assessmentView = assessmentView;
+    public LetterListAdapter(IdentificationView identificationView, boolean choice) {
+        this.identificationView = identificationView;
         this.choice = choice;
         letters = new ArrayList<>();
     }
@@ -49,7 +49,7 @@ public class LetterListAdapter extends RecyclerView.Adapter<LetterListAdapter.Vi
         if (letters.get(position).getLetter().isEmpty() || letters.get(position).isSpace()) {
             holder.itemLetterBinding.setView(null);
         } else {
-            holder.itemLetterBinding.setView(assessmentView);
+            holder.itemLetterBinding.setView(identificationView);
         }
 
     }
@@ -72,29 +72,30 @@ public class LetterListAdapter extends RecyclerView.Adapter<LetterListAdapter.Vi
         notifyItemChanged(position);
     }
 
-    public void addLetter(String letter) {
+    public void addLetter(String letter, int emptyIndex) {
         Log.d(TAG, "addLetter: letter " + letter);
-        for (int i = 0; i < letters.size(); i++) {
-            if (!letters.get(i).isSpace() && letters.get(i).getLetter().isEmpty()) {
-                Log.d(TAG, "addLetter: position " + i);
-                Log.d(TAG, "addLetter: new letter " + letter);
-                Letter letter1 = letters.get(i);
-                letter1.setLetter(letter);
-                letters.set(i, letter1);
-                letters.get(i).getLetter();
-                Log.d(TAG, "addLetter: after letter " + letters.get(i).getLetter());
-                notifyItemChanged(i);
-                return;
-            }
-        }
+        Letter letter1 = letters.get(emptyIndex);
+        letter1.setLetter(letter);
+        letters.set(emptyIndex, letter1);
+        letters.get(emptyIndex).getLetter();
+        Log.d(TAG, "addLetter: after letter " + letters.get(emptyIndex).getLetter());
+        notifyItemChanged(emptyIndex);
     }
 
     public String getAnswer() {
         String answer = "";
-        for (Letter letter : letters) {
-            answer += letter.getLetter();
-        }
+        for (Letter letter : letters) answer += letter.getLetter();
         return answer;
+    }
+
+    public boolean completeAnswer() {
+        return getAnswer().length() == letters.size();
+    }
+
+    public int getEmptyIndex() {
+        for (int i = 0; i < letters.size(); i++)
+            if (!letters.get(i).isSpace() && letters.get(i).getLetter().isEmpty()) return i;
+        return -1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

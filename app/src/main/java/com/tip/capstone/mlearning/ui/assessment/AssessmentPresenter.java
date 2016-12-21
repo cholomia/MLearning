@@ -6,6 +6,7 @@ import com.hannesdorfmann.mosby.mvp.MvpNullObjectBasePresenter;
 import com.tip.capstone.mlearning.model.Assessment;
 import com.tip.capstone.mlearning.model.AssessmentChoice;
 import com.tip.capstone.mlearning.model.Letter;
+import com.tip.capstone.mlearning.model.UserAnswer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,7 +97,7 @@ class AssessmentPresenter extends MvpNullObjectBasePresenter<AssessmentView> {
         List<Letter> letters = new ArrayList<>();
         for (int i = 0; i < answer.length(); i++) {
             Letter letter = new Letter();
-            letter.setLetter("");
+            letter.setLetter((answer.charAt(i) + "").contentEquals(" ") ? " " : "");
             letter.setGenerated(false);
             letter.setGiven(false);
             letter.setSpace((answer.charAt(i) + "").contentEquals(" "));
