@@ -57,7 +57,7 @@ public class VideoListPresenter extends MvpNullObjectBasePresenter<VideoListView
             "Redox titration lab - permanganate and iron (II) under acidic conditions"
     };
 
-    public void loadVideoList() {
+    public void loadVideoList(String query) {
         List<Video> videoList = new ArrayList<>();
         for (int i = 0; i < VIDEO_RES_ID.length; i++) {
             int resId = VIDEO_RES_ID[i];
@@ -66,7 +66,12 @@ public class VideoListPresenter extends MvpNullObjectBasePresenter<VideoListView
             String videoTitle = i < VIDEO_TITLE.length ?
                     VIDEO_TITLE[i] : "";
             Video video = new Video(resId, nameWithoutExtension, videoTitle);
-            videoList.add(video);
+            if (query != null && !query.isEmpty() && videoTitle.toUpperCase().contains(query.toUpperCase())) {
+                videoList.add(video);
+            } else if (query == null || query.isEmpty()) {
+                videoList.add(video);
+            }
+
         }
         getView().setVideoList(videoList);
     }

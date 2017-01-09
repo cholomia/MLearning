@@ -1,7 +1,12 @@
 package com.tip.capstone.mlearning.ui.lesson.detail;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -12,6 +17,7 @@ import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ItemLessonDetailImageBinding;
 import com.tip.capstone.mlearning.databinding.ItemLessonDetailTextBinding;
 import com.tip.capstone.mlearning.databinding.ItemLessonHeaderBinding;
+import com.tip.capstone.mlearning.databinding.ItemLessonQuizButtonBinding;
 import com.tip.capstone.mlearning.helper.ImageHelper;
 import com.tip.capstone.mlearning.model.Lesson;
 import com.tip.capstone.mlearning.model.LessonDetail;
@@ -30,11 +36,14 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private static final int VIEW_HEADER = 0;
     private static final int VIEW_TEXT = 1;
     private static final int VIEW_IMAGE = 2;
+    private static final int VIEW_QUIZ = 3;
     private static final String TAG = LessonDetailListAdapter.class.getSimpleName();
 
     private final Lesson lesson;
     private final List<LessonDetail> lessonDetails;
     private final LessonDetailListView view;
+    private boolean isLastPage;
+    private String query;
 
     /**
      * Constructor
@@ -42,9 +51,11 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param lesson lesson of the list (for header purposes)
      * @param view   for listener of items
      */
-    LessonDetailListAdapter(Lesson lesson, LessonDetailListView view) {
+    LessonDetailListAdapter(Lesson lesson, LessonDetailListView view, boolean isLastPage, String query) {
         this.lesson = lesson;
         this.view = view;
+        this.isLastPage = isLastPage;
+        this.query = query;
         lessonDetails = new ArrayList<>();
     }
 
@@ -52,6 +63,8 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemViewType(int position) {
         if (position == 0 && lesson != null) {
             return VIEW_HEADER;
+        } else if (isLastPage && position == (getItemCount() - 1)) {
+            return VIEW_QUIZ;
         } else {
             // decrement index for list if has lesson
             int index = lesson != null ? position - 1 : position;
@@ -89,6 +102,13 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         parent,
                         false);
                 return new LessonDetailImageViewHolder(itemLessonDetailImageBinding);
+            case VIEW_QUIZ:
+                ItemLessonQuizButtonBinding itemLessonQuizButtonBinding = DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        R.layout.item_lesson_quiz_button,
+                        parent,
+                        false);
+                return new LessonQuizButtonHolder(itemLessonQuizButtonBinding);
             default:
                 return null;
         }
@@ -106,6 +126,22 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 lessonDetailTextViewHolder.itemLessonDetailTextBinding
                         .setLessonDetail(lessonDetails.get(lesson != null ? position - 1 : position));
                 lessonDetailTextViewHolder.itemLessonDetailTextBinding.setView(view);
+
+                //use a loop to change text color
+                String text = lessonDetailTextViewHolder.itemLessonDetailTextBinding.getLessonDetail().getBody();
+                if (query != null && !query.isEmpty() &&
+                        text.toUpperCase().contains(query.toUpperCase())) {
+                    Log.d(TAG, "onBindViewHolder: id:" + lessonDetailTextViewHolder.itemLessonDetailTextBinding.getLessonDetail().getId());
+                    Log.d(TAG, "onBindViewHolder: query: " + query);
+                    Spannable WordtoSpan = new SpannableString(text);
+                    int startIndex = text.toUpperCase().indexOf(query.toUpperCase());
+                    int stopIndex = startIndex + query.length();
+                    WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), startIndex, stopIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    WordtoSpan.setSpan(new BackgroundColorSpan(Color.YELLOW), startIndex, stopIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    lessonDetailTextViewHolder.itemLessonDetailTextBinding.txtBody.setText(WordtoSpan);
+                } else {
+                    Log.d(TAG, "onBindViewHolder: query: " + query);
+                }
                 break;
             case VIEW_IMAGE:
                 LessonDetailImageViewHolder lessonDetailImageViewHolder = (LessonDetailImageViewHolder) holder;
@@ -118,6 +154,10 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                 lessonDetails.get(lesson != null ? position - 1 : position).getBody()))
                         .into(lessonDetailImageViewHolder.itemLessonDetailImageBinding.imageLessonDetail);
                 break;
+            case VIEW_QUIZ:
+                LessonQuizButtonHolder lessonQuizButtonHolder = (LessonQuizButtonHolder) holder;
+                lessonQuizButtonHolder.itemLessonQuizButtonBinding.setView(view);
+                break;
         }
     }
 
@@ -125,6 +165,7 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public int getItemCount() {
         int size = lessonDetails.size();
         if (lesson != null) size++;
+        if (isLastPage) size++;
         return size;
     }
 
@@ -161,6 +202,15 @@ class LessonDetailListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         LessonDetailImageViewHolder(ItemLessonDetailImageBinding itemLessonDetailImageBinding) {
             super(itemLessonDetailImageBinding.getRoot());
             this.itemLessonDetailImageBinding = itemLessonDetailImageBinding;
+        }
+    }
+
+    private class LessonQuizButtonHolder extends RecyclerView.ViewHolder {
+        private final ItemLessonQuizButtonBinding itemLessonQuizButtonBinding;
+
+        LessonQuizButtonHolder(ItemLessonQuizButtonBinding itemLessonQuizButtonBinding) {
+            super(itemLessonQuizButtonBinding.getRoot());
+            this.itemLessonQuizButtonBinding = itemLessonQuizButtonBinding;
         }
     }
 

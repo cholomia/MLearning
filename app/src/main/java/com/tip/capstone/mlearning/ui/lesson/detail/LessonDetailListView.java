@@ -16,4 +16,6 @@ public interface LessonDetailListView extends MvpView {
      * @param lessonDetail item clicked
      */
     void onDetailClick(LessonDetail lessonDetail);
+
+    void onQuiz();
 }

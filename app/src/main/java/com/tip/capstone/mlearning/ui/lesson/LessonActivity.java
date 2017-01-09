@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,11 +21,14 @@ import com.tip.capstone.mlearning.R;
 import com.tip.capstone.mlearning.app.Constant;
 import com.tip.capstone.mlearning.databinding.ActivityLessonBinding;
 import com.tip.capstone.mlearning.model.Lesson;
+import com.tip.capstone.mlearning.model.LessonDetail;
 import com.tip.capstone.mlearning.model.PreQuizGrade;
 import com.tip.capstone.mlearning.model.Topic;
 import com.tip.capstone.mlearning.ui.quiz.QuizActivity;
 
+import io.realm.Case;
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * @author pocholomia
@@ -32,6 +37,7 @@ import io.realm.Realm;
 public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
         implements LessonView, ViewPager.OnPageChangeListener {
 
+    private static final String TAG = LessonActivity.class.getSimpleName();
     private ActivityLessonBinding binding;
     private Realm realm;
 
@@ -65,7 +71,7 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
 
         getSupportActionBar().setTitle(topic.getTitle());
 
-        lessonPageAdapter = new LessonPageAdapter(getSupportFragmentManager());
+        lessonPageAdapter = new LessonPageAdapter(getSupportFragmentManager(), topicId);
         binding.container.addOnPageChangeListener(this);
         binding.container.setAdapter(lessonPageAdapter);
 
@@ -141,6 +147,29 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lesson, menu);
+        SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "onQueryTextSubmit: " + query);
+                RealmResults<Lesson> lessonRealmResults = topic.getLessons().where()
+                        .contains("lessondetails.body", query, Case.INSENSITIVE).findAllSorted(Lesson.COL_SEQ);
+                RealmResults<LessonDetail> lessonDetail = lessonRealmResults.first()
+                        .getLessondetails().where().contains("body", query, Case.INSENSITIVE)
+                        .findAllSorted(LessonDetail.COL_SEQ);
+                lessonPageAdapter.setQuery(query, lessonDetail.first().getId());
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextChange: " + newText);
+                if (newText.isEmpty()) {
+                    lessonPageAdapter.setQuery(null, -1);
+                }
+                return false;
+            }
+        });
         return true;
     }
 
@@ -150,11 +179,11 @@ public class LessonActivity extends MvpActivity<LessonView, LessonPresenter>
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.action_quiz:
+            /*case R.id.action_quiz:
                 Intent intent = new Intent(this, QuizActivity.class);
                 intent.putExtra(Constant.ID, topic.getId());
                 startActivity(intent);
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
