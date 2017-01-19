@@ -31,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/txt_title"
+                android:layout_toRightOf="@+id/txt_title"
                 android:gravity="end"
                 android:text="@string/raw_score"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -44,7 +45,8 @@
                 android:gravity="end"
                 android:text="@string/average"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_widthPercent="30%" />
+                app:layout_widthPercent="30%"
+                android:layout_toRightOf="@+id/txt_raw_score" />
 
         </android.support.percent.PercentRelativeLayout>
 

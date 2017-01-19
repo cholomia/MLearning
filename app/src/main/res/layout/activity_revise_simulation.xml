@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/activity_revise_simulation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.tip.capstone.mlearning.ui.simulation.ReviseSimulationActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_top_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Panel 1"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_top_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Panel 2"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_bottom_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Panel 3"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/layout_bottom_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                app:alignContent="flex_start"
+                app:alignItems="flex_start"
+                app:flexWrap="wrap">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Panel 4"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

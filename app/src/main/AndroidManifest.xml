@@ -38,7 +38,10 @@
             android:name=".ui.simulation.SimulationActivity"
             android:label="@string/title_activity_simulation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.glossary.GlossaryActivity"></activity>
+        <activity android:name=".ui.glossary.GlossaryActivity" />
+        <activity
+            android:name=".ui.simulation.ReviseSimulationActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

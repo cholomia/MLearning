@@ -121,7 +121,7 @@ public class ChoiceListAdapter extends RecyclerView.Adapter<ChoiceListAdapter.Vi
             itemChoiceBinding.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) resetSelected(getAdapterPosition());
+                    resetSelected(b ? getAdapterPosition() : -1);
                 }
             });
         }
